@@ -6,13 +6,18 @@
 #include "Word.hpp"
 #include "User.hpp"
 
-
+/**
+ * 1. Loader is a singleton
+ * 2. if anyone wants to change database, it show use store and load
+ */
 
 class Loader{
-    static const std::string words_path;
-    static const std::string user_path;
-
+    static const std::string config_dir;
+    std::vector<Word> words;
 public:
+    std::vector<Word> & load();
+    void store();
+
     static Loader& getInstance(){
         static Loader    instance;
         return instance;

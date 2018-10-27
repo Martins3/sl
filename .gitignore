@@ -3,6 +3,8 @@ GRTAGS
 GTAGS
 json.hpp
 
+*.json
+
 # Prerequisites
 *.d
 

@@ -4,20 +4,27 @@
 #include <chrono>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <algorithm>
+#include "json.hpp"
+#include <ctime>
 
 
 class Word{
     // how many times forget it !
-    int forget_counter;
     int id;
+    int index;
     std::string word;
     // time point to query the words
-    std::vector<std::chrono::time_point<std::chrono::system_clock> > query_time_point;
+    std::vector<std::pair<time_t, bool> > query_time_point;
     // whether the word is mask as impressive
     bool killed;
-
 public:
-    Word(std::string w);
+    friend void to_json(nlohmann::json& j, const Word& p);
+    friend void from_json(const nlohmann::json& j, Word& p);
+
+    Word(std::string w, int id);
+    Word() = default; // for json
     void kill();
     // remove from database
     void remove();

@@ -3,7 +3,7 @@ FLAG = -std=c++14 -g -Wall  -Debug -pthread
 TARTGET = Review.out
 
 
-CPP_SOURCES = $(wildcard *.cpp)
+CPP_SOURCES = $(wildcard *.cpp ./Test/*.cpp)
 CPP_HEADERS = $(wildcard ./Include/*.hpp) 
 OBJ = ${CPP_SOURCES:.cpp=.o} 
 
