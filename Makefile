@@ -1,6 +1,7 @@
 CC = clang++
-FLAG = -std=c++14 -g -Wall
-TARTGET = Review
+FLAG = -std=c++14 -g -Wall  -Debug -pthread
+TARTGET = Review.out
+
 
 CPP_SOURCES = $(wildcard *.cpp)
 CPP_HEADERS = $(wildcard ./Include/*.hpp) 
@@ -24,6 +25,9 @@ ${TARTGET}: ${OBJ}
 run: ${TARTGET}
 	./${TARTGET}
 
+test: ${TARTGET}
+	./${TARTGET} -?
+
 main: main.cpp
 	clang++ -S  main.cpp -std=c++11
 
@@ -32,4 +36,5 @@ main: main.cpp
 
 clean:
 	rm -f *.o
+	rm -f ./Include/*.hpp.gch*
 	rm -f ${TARTGET}

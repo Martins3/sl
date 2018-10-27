@@ -7,6 +7,6 @@
  * define a bunch of functions to review
  */
 class Strategy{
-    std::vector<Word> Ebbinghaus(std::vector<Word> & database);
+    static std::vector<Word> Ebbinghaus(std::vector<Word> & database);
 };
 #endif

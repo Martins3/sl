@@ -8,9 +8,10 @@
 /**
  * Configiration for user.
  * 1. how many words to show
- * 2. 
+ * 2.
  */
 class User{
+    
 };
 
 
