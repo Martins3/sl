@@ -24,9 +24,8 @@ class Interface{
     const std::string ANSI_COLOR_CYAN    = "\x1b[36m";
     const std::string ANSI_COLOR_RESET   = "\x1b[0m";
     // command line args
-    int show_number;
-
-    std::string word;
+    int show_limitation;
+    int word_index;
     bool forget = false;
 
     // print

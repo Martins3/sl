@@ -19,8 +19,11 @@ int Interface::parse_options(int argc, const char *argv[]){
                 forget = true;
                 break;
             case 'w':
-                word = optarg;
-                cout << "word is " << word << endl;
+                word = strtol(optarg, NULL, 10);
+                if(show_number == errno){
+                    cout << "Count of lines show be a integer" << endl;
+                    abort();
+                }
                 break;
             case 'c':
                 show_number = strtol(optarg, NULL, 10);
@@ -47,14 +50,18 @@ int Interface::parse_options(int argc, const char *argv[]){
 }
 
 void Interface::handle(){
-    if(word.size()){
-        if(forget){
-            
-        }else{
 
-        }
-    }else{
-    }
+    // if(word.size()){
+//
+//
+        // if(forget){
+            // Word w;
+           // Strategy::check(, true)
+        // }else{
+//
+        // }
+    // }else{
+    // }
 
     cout << "handle over" << endl;
 }

@@ -2,11 +2,28 @@
 #define STRATEGY_HPP
 
 #include "Word.hpp"
+#include "User.hpp"
+
 
 /**
- * define a bunch of functions to review
+ * Strategy constains to function:
+ * 1. how to sort words
+ * 2. what to do when check one word
  */
 class Strategy{
-    static std::vector<Word> Ebbinghaus(std::vector<Word> & database);
+    User config;
+public:
+    void Ebbinghaus(std::vector<Word> & words);
+    void check(Word & w, bool forget = false);
+
+    static Strategy& getInstance(){
+        static Strategy    instance;
+        return instance;
+    }
+    Strategy(Strategy const&)       = delete;
+    void operator=(Strategy const&)  = delete;
+
+private:
+    Strategy() = default;
 };
 #endif

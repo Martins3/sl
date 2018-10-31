@@ -20,6 +20,7 @@ class Word{
     // whether the word is mask as impressive
     bool killed;
 public:
+    friend class Strategy;
     friend void to_json(nlohmann::json& j, const Word& p);
     friend void from_json(const nlohmann::json& j, Word& p);
 

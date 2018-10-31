@@ -11,21 +11,14 @@
 
 using namespace std;
 
-auto f = [](Loader & l){
-    
-};
-
 
 using namespace std;
 
 int main(int argc, const char *argv[]){
-    fuck_to_json();
-
-    Loader & L = Loader::getInstance();
-    thread loader(f, ref(L));
+    thread loader([](){ Loader::getInstance().load(); });
 
     Interface & I = Interface::getInstance();
-    if(I.parse_options(argc,  argv) == 1){
+    if(I.parse_options(argc,  argv) == 0){
         loader.join();
         I.handle();
     }else{

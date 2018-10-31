@@ -1,5 +1,6 @@
 #include "Include/Loader.hpp"
 #include "Include/Word.hpp" // 用于提供friend 信息
+#include "Include/User.hpp"
 #include <fstream>
 
 using json = nlohmann::json;
@@ -24,6 +25,18 @@ void from_json(const json& j, Word& p){
     j.at("killed").get_to(p.killed);
 }
 
+void to_json(json& j, const User& u){
+    j =  json{
+        {"show_limitation", u.show_limitation},
+        {"check_point"}, u.check_point
+    };
+}
+
+void from_json(const json& j, User& p){
+    j.at("show_limitation").get_to(p.show_limitation);
+    j.at("check_point").get_to(p.check_point);
+}
+
 
 // 注意：这里的~不可以使用
 const std::string Loader::config_dir = "/home/shen/Core/sl/Test/";
@@ -35,6 +48,7 @@ void Loader::store(){
         outfile << j.dump() << endl;
     }
     outfile.close();
+
 }
 
 
