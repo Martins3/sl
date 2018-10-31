@@ -3,6 +3,7 @@ GRTAGS
 GTAGS
 json.hpp
 
+
 *.json
 
 # Prerequisites
@@ -17,6 +18,7 @@ json.hpp
 # Precompiled Headers
 *.gch
 *.pch
+*.gch*
 
 # Compiled Dynamic libraries
 *.so
