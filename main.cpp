@@ -11,12 +11,8 @@
 
 using namespace std;
 
-
-using namespace std;
-
 int main(int argc, const char *argv[]){
     thread loader([](){ Loader::getInstance().load(); });
-
     Interface & I = Interface::getInstance();
     if(I.parse_options(argc,  argv) == 0){
         loader.join();

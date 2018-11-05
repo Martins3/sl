@@ -24,9 +24,12 @@ class Interface{
     const std::string ANSI_COLOR_CYAN    = "\x1b[36m";
     const std::string ANSI_COLOR_RESET   = "\x1b[0m";
     // command line args
-    int show_limitation;
-    int word_index;
+    int word_id;
     bool forget = false;
+
+    std::string path_to_config = nullptr;
+    std::string path_to_new_words = nullptr;
+    std::string word = nullptr;
 
     // print
     void println(const std::string & line, enum COLOR c = RED);
@@ -34,9 +37,6 @@ class Interface{
         std::cout << std::left << std::setw(width) << std::setfill(' ') << t;
     }
 
-    // show words startery
-    
-    // modify data base
 public:
     Interface(Interface const&)       = delete;
     void operator=(Interface const&)  = delete;
@@ -50,5 +50,6 @@ public:
 private:
     Interface() = default;
 };
+
 #endif
 

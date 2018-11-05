@@ -12,8 +12,7 @@ void to_json(json& j, const Word& p){
         {"index", p.index},
         {"id", p.id},
         {"word", p.word},
-        {"query_time_point", p.query_time_point},
-        {"killed", p.killed},
+        {"query_time_point", p.query_time_point}, {"killed", p.killed},
     };
 }
 
@@ -28,31 +27,32 @@ void from_json(const json& j, Word& p){
 void to_json(json& j, const User& u){
     j =  json{
         {"show_limitation", u.show_limitation},
-        {"check_point"}, u.check_point
     };
 }
 
 void from_json(const json& j, User& p){
     j.at("show_limitation").get_to(p.show_limitation);
-    j.at("check_point").get_to(p.check_point);
 }
-
 
 // 注意：这里的~不可以使用
 const std::string Loader::config_dir = "/home/shen/Core/sl/Test/";
 
 void Loader::store(){
-    std::ofstream outfile (config_dir + "words.json");
+    std::ofstream outfile(config_dir + "words.json");
     for(Word & w : words){
         json j = w;
         outfile << j.dump() << endl;
     }
     outfile.close();
 
+    outfile = std::ofstream(config_dir + "user.json");
+    json j = user;
+    outfile << j.dump() << endl;
+    outfile.close();
 }
 
 
-vector<Word> & Loader::load(){
+void Loader::load(){
     std::ifstream infile(config_dir + "words.json");
     string line;
     while (std::getline(infile, line)){
@@ -60,8 +60,10 @@ vector<Word> & Loader::load(){
         Word w = j;
         words.push_back(w);
     }
-    return words;
+
+    // Parse a file
 }
+
 
 
 

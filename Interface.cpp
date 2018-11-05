@@ -1,5 +1,7 @@
 #include "Include/Interface.hpp"
 #include "Include/Strategy.hpp"
+#include "Include/Query.hpp"
+#include "Include/Loader.hpp"
 #include<iostream>
 #include<stdio.h>
 #include<ctype.h>
@@ -9,38 +11,43 @@ using namespace std;
 
 int Interface::parse_options(int argc, const char *argv[]){
     int opt;
-    while ((opt = getopt(argc,(char **)argv,"fw:c:")) != EOF){
-        switch(opt){
-            case 'f':
 #ifdef Debug
                 cout << "forget" << endl;
 #endif
-                cout << "forget" << endl;
+    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:?")) != EOF){
+        switch(opt){
+            case 'r':
+                word_id = strtol(optarg, NULL, 10);
+                if(word_id == errno){
+                    cout << "word is should be a integer" << endl;
+                    abort();
+                }
                 forget = true;
                 break;
-            case 'w':
-                word = strtol(optarg, NULL, 10);
-                if(show_number == errno){
-                    cout << "Count of lines show be a integer" << endl;
+            case 'f':
+                word_id = strtol(optarg, NULL, 10);
+                if(word_id == errno){
+                    cout << "word id should be a integer" << endl;
                     abort();
                 }
                 break;
             case 'c':
-                show_number = strtol(optarg, NULL, 10);
-                if(show_number == errno){
-                    cout << "Count of lines show be a integer" << endl;
-                    abort();
-                }
-                cout << "show number "<< show_number << endl;
+                path_to_config = optarg;
+                cout << "Path to configuration is : "<< path_to_config << endl;
+                break;
+            case 'd':
+                path_to_new_words = optarg;
+                cout << "Path to new Words is : "<< path_to_new_words << endl;
+                break;
+            case 'w':
+                word = optarg;
+                cout << "Added words is : "<< word << endl;
                 break;
             case '?':
                 fprintf(stderr,
-                        "usuage is \n\
-                        -c : for enabling cowsay(todo) \n\
-                        -w : show statistic for one word \n\
-                        -s: show user learning process\n\
-                        -n: set how many words to show\n\
+                        "usuage is: \n\
                         ");
+                break;
             default:
                 cout << endl;
                 abort();
@@ -50,20 +57,49 @@ int Interface::parse_options(int argc, const char *argv[]){
 }
 
 void Interface::handle(){
+    Query & query = Query::getInstance();
+    Loader & loader = Loader::getInstance();
+    if(path_to_config.size()){
+        cout << "reading config" << endl;
+        return;
+    }
 
-    // if(word.size()){
-//
-//
-        // if(forget){
-            // Word w;
-           // Strategy::check(, true)
-        // }else{
-//
-        // }
-    // }else{
-    // }
+    if(path_to_new_words.size()){
+        cout << "reading data" << endl;
+        return;
+    }
 
-    cout << "handle over" << endl;
+    if(word.size()){
+        if(!query.check_in_range(word)){
+            cout << "Added words is not in the database !" << endl;
+            return;
+        }
+
+        else{
+            /**
+             * Find the unused id, this algorithm seems fairly stupid.
+             * TODO: fix this by using a special word.
+             */
+            vector<Word> & words = loader.getWords();
+            sort(words.begin(), words.end(), SortById());
+            for (int i = 0; i < words.size(); i++) {
+                if(i != words[i].id){
+
+                }
+            }
+        }
+        return;
+    }
+
+    if(forget){
+        cout << "forget some wrods" << endl;
+    }
+
+
+    else{
+        cout << "remember some words" << endl;
+
+    }
 }
 
 

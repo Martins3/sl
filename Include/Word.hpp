@@ -11,8 +11,8 @@
 
 
 class Word{
-    // how many times forget it !
     int id;
+    // how many times forget it !
     int index;
     std::string word;
     // time point to query the words
@@ -23,6 +23,8 @@ public:
     friend class Strategy;
     friend void to_json(nlohmann::json& j, const Word& p);
     friend void from_json(const nlohmann::json& j, Word& p);
+    friend struct SortById;
+    friend struct SortByIndex;
 
     Word(std::string w, int id);
     Word() = default; // for json
@@ -33,5 +35,15 @@ public:
     void check(bool forget = true);
 };
 
+struct SortById{
+    inline bool operator()(Word a, Word b){
+        return a.id > b.id;
+    }
+};
 
+struct SortByIndex{
+    inline bool operator()(Word a, Word b){
+        return a.index > b.index;
+    }
+};
 #endif

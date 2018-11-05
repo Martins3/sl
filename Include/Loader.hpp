@@ -14,9 +14,15 @@
 class Loader{
     static const std::string config_dir;
     std::vector<Word> words;
+    User user;
 public:
-    std::vector<Word> & load();
+    // load should be done at begining 
+    void load();
     void store();
+
+    std::vector<Word> & getWords(){
+        return words;
+    }
 
     static Loader& getInstance(){
         static Loader    instance;
@@ -24,7 +30,6 @@ public:
     }
     Loader(Loader const&)       = delete;
     void operator=(Loader const&)  = delete;
-
 private:
     Loader() = default;
 };
