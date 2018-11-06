@@ -1,5 +1,5 @@
 CC = clang++
-FLAG = -std=c++14 -g -Wall  -Debug -pthread
+FLAG = -std=c++14 -g -Wall  -Debug -pthread -I./Include
 TARTGET = Review.out
 
 

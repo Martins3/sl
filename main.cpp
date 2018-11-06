@@ -1,7 +1,7 @@
-#include "Include/Word.hpp"
-#include "Include/Interface.hpp"
-#include "Include/Loader.hpp"
-#include "Include/Test.hpp"
+#include <Word.hpp>
+#include <Interface.hpp>
+#include <Loader.hpp>
+#include <Test.hpp>
 
 // Test files
 

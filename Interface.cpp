@@ -1,11 +1,11 @@
-#include "Include/Interface.hpp"
-#include "Include/Strategy.hpp"
-#include "Include/Query.hpp"
-#include "Include/Loader.hpp"
-#include<iostream>
-#include<stdio.h>
-#include<ctype.h>
-#include<stdlib.h>
+#include <Interface.hpp>
+#include <Strategy.hpp>
+#include <Query.hpp>
+#include <Loader.hpp>
+#include <iostream>
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -83,9 +83,6 @@ void Interface::handle(){
             vector<Word> & words = loader.getWords();
             sort(words.begin(), words.end(), SortById());
             for (int i = 0; i < words.size(); i++) {
-                if(i != words[i].id){
-
-                }
             }
         }
         return;

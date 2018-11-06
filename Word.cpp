@@ -1,4 +1,4 @@
-#include "Include/Word.hpp"
+#include <Word.hpp>
 using namespace std;
 
 Word::Word(std::string w, int id):
