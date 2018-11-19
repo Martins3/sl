@@ -4,7 +4,6 @@
 #include <Test.hpp>
 
 // Test files
-
 #include<iostream>
 #include<stdio.h>
 #include<thread>
@@ -14,6 +13,10 @@ using namespace std;
 int main(int argc, const char *argv[]){
     thread loader([](){ Loader::getInstance().load(); });
     Interface & I = Interface::getInstance();
+
+#ifdef DEBUG
+    printf("%s\n", "ffffffffff");
+#endif
     if(I.parse_options(argc,  argv) == 0){
         loader.join();
         I.handle();
@@ -24,4 +27,3 @@ int main(int argc, const char *argv[]){
     }
     return 0;
 }
-
