@@ -1,10 +1,10 @@
 CC = clang++
-FLAG = -std=c++14 -g -Wall  -DEBUG -pthread -I./Include
+FLAG = -std=c++14 -g -Wall  -DEBUG -pthread -I./include
 TARTGET = Review.out
 
 
-CPP_SOURCES = $(wildcard *.cpp ./Test/*.cpp)
-CPP_HEADERS = $(wildcard ./Include/*.hpp) 
+CPP_SOURCES = $(wildcard *.cpp ./test/*.cpp)
+CPP_HEADERS = $(wildcard ./include/*.hpp) 
 OBJ = ${CPP_SOURCES:.cpp=.o} 
 
 

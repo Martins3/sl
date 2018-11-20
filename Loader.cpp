@@ -12,8 +12,7 @@ void to_json(json& j, const Word& p){
         {"index", p.index},
         {"id", p.id},
         {"word", p.word},
-        {"query_time_point", p.query_time_point}, {"killed", p.killed},
-    };
+        {"query_time_point", p.query_time_point}, {"killed", p.killed}, };
 }
 
 void from_json(const json& j, Word& p){
@@ -30,12 +29,13 @@ void to_json(json& j, const User& u){
     };
 }
 
+
 void from_json(const json& j, User& p){
     j.at("show_limitation").get_to(p.show_limitation);
 }
 
 // 注意：这里的~不可以使用
-const std::string Loader::config_dir = "/home/shen/Core/sl/Test/";
+const std::string Loader::config_dir = "/home/shen/Core/sl/test/";
 
 void Loader::store(){
     std::ofstream outfile(config_dir + "words.json");
@@ -55,16 +55,15 @@ void Loader::store(){
 void Loader::load(){
     std::ifstream infile(config_dir + "words.json");
     string line;
+    // TODO: should not restricted to a line
     while (std::getline(infile, line)){
         json j = json::parse(line);
         Word w = j;
         words.push_back(w);
     }
 
-    // Parse a file
+    infile = std::ifstream(config_dir + "words.json");
+    std::getline(infile, line);
+    json j = json::parse(line);
+    user = j;
 }
-
-
-
-
-

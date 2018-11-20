@@ -31,7 +31,7 @@ class Interface{
     std::string path_to_new_words = nullptr;
     std::string word = nullptr;
 
-    // print
+    // beatify the print TODO
     void println(const std::string & line, enum COLOR c = RED);
     template<typename T> void printElement(T t, const int& width) {
         std::cout << std::left << std::setw(width) << std::setfill(' ') << t;

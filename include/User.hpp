@@ -17,6 +17,11 @@ class User{
     // std::string strategy;
     friend void to_json(json& j, const User& u);
     friend void from_json(const json& j, User& p);
+
+public:
+    int get_show_limitation(){
+        return show_limitation;
+    }
 };
 
 

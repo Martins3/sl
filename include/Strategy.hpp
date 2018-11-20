@@ -14,6 +14,7 @@ class Strategy{
     User config;
 public:
     void Ebbinghaus(std::vector<Word> & words);
+
     void check(Word & w, bool forget = false);
 
     static Strategy& getInstance(){

@@ -24,6 +24,10 @@ public:
         return words;
     }
 
+    User & getUserConfig(){
+        return user;
+    }
+
     static Loader& getInstance(){
         static Loader    instance;
         return instance;

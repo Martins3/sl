@@ -18,6 +18,7 @@ std::string Query::exec(const std::string cmd) {
     return result;
 }
 
-bool Query::check_in_range(std::string word){
-    return true;
-}
+// no time to implement it !
+// bool Query::check_in_range(std::string word){
+    // return true;
+// }

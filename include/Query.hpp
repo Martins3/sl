@@ -8,9 +8,9 @@ private:
 public:
     // use shell-translate
     void trans(std::string word);
-    // use database
+    // use database TODO
     void ecdict(std::string word);
-    // check the words is in our specific database
+    // check the words is in our specific database TODO
     bool check_in_range(std::string word);
 
 
@@ -21,8 +21,6 @@ public:
         static Query    instance;
         return instance;
     }
-    int parse_options(int argc, const char *argv[]);
-    void handle();
 private:
     Query() = default;
 };

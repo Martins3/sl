@@ -26,6 +26,16 @@ public:
     friend struct SortById;
     friend struct SortByIndex;
 
+    void print_header(){
+        std::cout << "id:    " << "word:    " << std::endl;
+    }
+
+    void print_word(){
+        std::cout << id << "\t" << word << std::endl;
+    }
+
+
+
     Word(std::string w, int id);
     Word() = default; // for json
     void kill();

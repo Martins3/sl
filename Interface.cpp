@@ -57,8 +57,9 @@ int Interface::parse_options(int argc, const char *argv[]){
 }
 
 void Interface::handle(){
-    Query & query = Query::getInstance();
-    Loader & loader = Loader::getInstance();
+    Strategy & S = Strategy::getInstance();
+    Loader & L = Loader::getInstance();
+
     if(path_to_config.size()){
         cout << "reading config" << endl;
         return;
@@ -69,22 +70,9 @@ void Interface::handle(){
         return;
     }
 
+    // add a word
     if(word.size()){
-        if(!query.check_in_range(word)){
-            cout << "Added words is not in the database !" << endl;
-            return;
-        }
 
-        else{
-            /**
-             * Find the unused id, this algorithm seems fairly stupid.
-             * TODO: fix this by using a special word.
-             */
-            vector<Word> & words = loader.getWords();
-            sort(words.begin(), words.end(), SortById());
-            for (int i = 0; i < words.size(); i++) {
-            }
-        }
         return;
     }
 
@@ -95,8 +83,11 @@ void Interface::handle(){
 
     else{
         cout << "remember some words" << endl;
-
     }
+
+    // just show words
+    S.Ebbinghaus(L.getWords());
+    int count = L.getUserConfig().get_show_limitation();
 }
 
 
