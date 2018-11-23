@@ -23,6 +23,8 @@ public:
     void add_one_word(const std::string & w);
     void add_file(const std::string & path);
 
+    void check_word(int id, bool forget);
+
     std::vector<Word> & getWords(){
         return words;
     }

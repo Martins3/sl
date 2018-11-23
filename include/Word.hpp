@@ -28,10 +28,8 @@ public:
     friend void from_json(const nlohmann::json& j, Word& p);
     friend struct SortById;
     friend struct SortByIndex;
+    friend struct SortByDic;
 
-    void print_header(){
-        std::cout << "id:    " << "word:    " << std::endl;
-    }
 
     void print_word(){
         std::cout << id << "\t" << word << std::endl;
@@ -39,6 +37,14 @@ public:
 
     int get_id(){
         return id;
+    }
+
+    void add_index(int i){
+        index += i;
+    }
+
+    std::string get_word(){
+        return word;
     }
 
     Word(std::string w, int id);
@@ -51,13 +57,19 @@ public:
 };
 
 struct SortById{
-    inline bool operator()(Word a, Word b){
+    inline bool operator()(const Word & a, const Word & b){
         return a.id > b.id;
     }
 };
 
+struct SortByDic{
+    inline bool operator()(const Word & a, const Word & b){
+        return a.word > b.word;
+    }
+};
+
 struct SortByIndex{
-    inline bool operator()(Word a, Word b){
+    inline bool operator()(const Word & a, const Word & b){
         return a.index > b.index;
     }
 };

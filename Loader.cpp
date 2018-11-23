@@ -2,6 +2,8 @@
 #include <Word.hpp> // 用于提供friend 信息
 #include <User.hpp>
 #include <fstream>
+#include <set>
+#include <string>
 
 using json = nlohmann::json;
 using namespace std;
@@ -74,6 +76,10 @@ void Loader::add_one_word(const std::string & w){
     vector<bool> id(word_num, false);
     for (int i = 0; i < word_num ; i++) {
         id[words[i].get_id()] = true;
+        // check if alread exits
+        if(w == words[i].get_word()){
+            exit(0);
+        }
     }
 
     int i;
@@ -82,6 +88,7 @@ void Loader::add_one_word(const std::string & w){
             break;
         }
     }
+
     // add word
     words.emplace_back(w, i);
 }
@@ -92,8 +99,8 @@ void Loader::add_file(const std::string & path){
         fprintf(stderr, "%s can't be opened !\n", path.c_str());
         exit(0);
     }
-
     fprintf(stderr, "Open %s\n", path.c_str());
+
     // get a bunch of id just by appending
     int max_id = 0;
     for(auto & w : words){
@@ -102,9 +109,42 @@ void Loader::add_file(const std::string & path){
         }
     }
 
+    set<string> sorted_words;
+    for(auto w : words){
+        sorted_words.insert(w.get_word());
+    }
+
+
     std::ifstream infile(path);
     string line;
     while (std::getline(infile, line)){
-        words.emplace_back(line, ++max_id);
+        auto f = sorted_words.find(line);
+        if(f == sorted_words.end()){
+            words.emplace_back(line, ++max_id);
+        }else{
+            sorted_words.insert(line);
+        }
+    }
+}
+
+void Loader::check_word(int id, bool forget){
+    // find the word
+    int word_num = words.size();
+    int i;
+    for (i = 0; i < word_num ; i++) {
+        if(words[i].get_id() == id){
+            break;
+        }
+    }
+    
+    if(i == word_num){
+        fprintf(stderr, "Error: can not find this word");
+        exit(0);
+    }
+
+    if(forget){
+        words[i].add_index(100);
+    }else{
+        words[i].add_index(-100);
     }
 }

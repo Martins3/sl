@@ -6,30 +6,35 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <string>
 
 using namespace std;
 
 int Interface::parse_options(int argc, const char *argv[]){
     int opt;
-#ifdef Debug
-                cout << "forget" << endl;
-#endif
+   cout << "forget" << endl;
+   cout << path_to_config.size() << endl;
+
     while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:?")) != EOF){
         switch(opt){
             case 'r':
                 word_id = strtol(optarg, NULL, 10);
                 if(word_id == errno){
                     cout << "word is should be a integer" << endl;
-                    abort();
+                    exit(0);
                 }
-                forget = true;
+                cout << "change it" << endl;
+                review = false;
                 break;
             case 'f':
                 word_id = strtol(optarg, NULL, 10);
                 if(word_id == errno){
                     cout << "word id should be a integer" << endl;
-                    abort();
+                    exit(0);
                 }
+                forget = true;
+                cout << "change it" << endl;
+                review = false;
                 break;
             case 'c':
                 path_to_config = optarg;
@@ -54,14 +59,22 @@ int Interface::parse_options(int argc, const char *argv[]){
     return 0;
 }
 
+
 void Interface::handle(){
     Strategy & S = Strategy::getInstance();
     Loader & L = Loader::getInstance();
 
+
+   cout << "forget" << endl;
+   cout << path_to_config.size() << endl;
     if(path_to_config.size()){
-        cout << "reading config" << endl;
+        // TODO L.read_config
+
+        cout << "forget" << endl;
+        L.store();
         return;
     }
+
 
     if(path_to_new_words.size()){
         L.add_file(path_to_new_words);
@@ -71,21 +84,33 @@ void Interface::handle(){
 
     // add a word
     if(word.size()){
+        L.add_one_word(word);
+        L.store();
         return;
     }
 
-    if(forget){
-        cout << "forget some wrods" << endl;
+   cout << "forget" << endl;
+   cout << review << endl;
+
+    if(review){
+        // just show words
+        vector<Word> & words = L.getWords();
+        S.Ebbinghaus(words);
+        int count = L.getUserConfig().get_show_limitation();
+
+        print_header();
+        for (int i = 0; i < count; i++) {
+            words[i].print_word();
+        }
     }
 
+    if(forget){
+        L.check_word(word_id, false);
+    }
 
     else{
-        cout << "remember some words" << endl;
+        L.check_word(word_id, true);
     }
-
-    // just show words
-    S.Ebbinghaus(L.getWords());
-    int count = L.getUserConfig().get_show_limitation();
 }
 
 

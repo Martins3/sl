@@ -10,6 +10,13 @@
 /**
  * handle user IO and show 
  */
+// const std::string ANSI_COLOR_RED     = "\x1b[31m";
+// const std::string ANSI_COLOR_GREEN   = "\x1b[32m";
+// const std::string ANSI_COLOR_YELLOW  = "\x1b[33m";
+// const std::string ANSI_COLOR_BLUE    = "\x1b[34m";
+// const std::string ANSI_COLOR_MAGENTA = "\x1b[35m";
+// const std::string ANSI_COLOR_CYAN    = "\x1b[36m";
+// const std::string ANSI_COLOR_RESET   = "\x1b[0m";
 
 enum COLOR{
     RED, GREEN, YELLO, BLUE, MAGENTA, CYAN
@@ -17,16 +24,10 @@ enum COLOR{
 
 class Interface{
     // colors
-    const std::string ANSI_COLOR_RED     = "\x1b[31m";
-    const std::string ANSI_COLOR_GREEN   = "\x1b[32m";
-    const std::string ANSI_COLOR_YELLOW  = "\x1b[33m";
-    const std::string ANSI_COLOR_BLUE    = "\x1b[34m";
-    const std::string ANSI_COLOR_MAGENTA = "\x1b[35m";
-    const std::string ANSI_COLOR_CYAN    = "\x1b[36m";
-    const std::string ANSI_COLOR_RESET   = "\x1b[0m";
     // command line args
     int word_id;
-    bool forget = false;
+    bool forget;
+    bool review;
 
     std::string path_to_config;
     std::string path_to_new_words;
@@ -36,6 +37,10 @@ class Interface{
     void println(const std::string & line, enum COLOR c = RED);
     template<typename T> void printElement(T t, const int& width) {
         std::cout << std::left << std::setw(width) << std::setfill(' ') << t;
+    }
+
+    void print_header(){
+        std::cout << "id:    " << "word:    " << std::endl;
     }
 
 public:
@@ -49,7 +54,7 @@ public:
     int parse_options(int argc, const char *argv[]);
     void handle();
 private:
-    Interface() = default;
+    Interface()=default;
 };
 
 #endif
