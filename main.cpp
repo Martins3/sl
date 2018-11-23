@@ -11,6 +11,10 @@
 using namespace std;
 
 int main(int argc, const char *argv[]){
+    // add one line for test stash
+    // test_load();
+    // add_word_using_file();
+    test_main(argc, argv);
     return 0;
     // add some lines after stash
 }

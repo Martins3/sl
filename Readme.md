@@ -1,7 +1,6 @@
 # Sl
 A tool silimilar to [sl](https://github.com/mtoyoda/sl), but used for review english words
 
-
 ## How to use it
 * command line:
 * -d add file to database
@@ -23,6 +22,6 @@ A tool silimilar to [sl](https://github.com/mtoyoda/sl), but used for review eng
 7. staragy:
     1. every one can define one
 8. statistic information
+10. not only can I record words, but also can I record sentence !
 
-9. use Holder to contains data, change user to Config
 ## Bugs

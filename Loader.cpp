@@ -6,6 +6,9 @@
 using json = nlohmann::json;
 using namespace std;
 
+// 注意：这里的~不可以使用
+const std::string Loader::config_dir = "/home/shen/Core/sl/src/";
+
 
 void to_json(json& j, const Word& p){
     j =  json{
@@ -29,13 +32,10 @@ void to_json(json& j, const User& u){
     };
 }
 
-
 void from_json(const json& j, User& p){
     j.at("show_limitation").get_to(p.show_limitation);
 }
 
-// 注意：这里的~不可以使用
-const std::string Loader::config_dir = "/home/shen/Core/sl/test/";
 
 void Loader::store(){
     std::ofstream outfile(config_dir + "words.json");
@@ -62,8 +62,49 @@ void Loader::load(){
         words.push_back(w);
     }
 
-    infile = std::ifstream(config_dir + "words.json");
+    infile = std::ifstream(config_dir + "user.json");
     std::getline(infile, line);
     json j = json::parse(line);
     user = j;
+}
+
+void Loader::add_one_word(const std::string & w){
+    // get unused id
+    int word_num = words.size();
+    vector<bool> id(word_num, false);
+    for (int i = 0; i < word_num ; i++) {
+        id[words[i].get_id()] = true;
+    }
+
+    int i;
+    for (i = 0; i < word_num; i++) {
+        if(!id[i]){
+            break;
+        }
+    }
+    // add word
+    words.emplace_back(w, i);
+}
+
+void Loader::add_file(const std::string & path){
+    ifstream f(path);
+    if(!f.good()){
+        fprintf(stderr, "%s can't be opened !\n", path.c_str());
+        exit(0);
+    }
+
+    fprintf(stderr, "Open %s\n", path.c_str());
+    // get a bunch of id just by appending
+    int max_id = 0;
+    for(auto & w : words){
+        if(max_id < w.get_id()){
+            max_id = w.get_id();
+        }
+    }
+
+    std::ifstream infile(path);
+    string line;
+    while (std::getline(infile, line)){
+        words.emplace_back(line, ++max_id);
+    }
 }

@@ -11,6 +11,9 @@
 
 
 class Word{
+    // config
+    static const int INDEX_BASE;
+
     int id;
     // how many times forget it !
     int index;
@@ -34,7 +37,9 @@ public:
         std::cout << id << "\t" << word << std::endl;
     }
 
-
+    int get_id(){
+        return id;
+    }
 
     Word(std::string w, int id);
     Word() = default; // for json

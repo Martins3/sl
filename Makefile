@@ -1,10 +1,10 @@
 CC = clang++
-FLAG = -std=c++14 -g -Wall  -DEBUG -pthread -I./include
+FLAG = -std=c++14 -g -Wall  -DEBUG -pthread -I./include -I./test
 TARTGET = Review.out
 
 
 CPP_SOURCES = $(wildcard *.cpp ./test/*.cpp)
-CPP_HEADERS = $(wildcard ./include/*.hpp) 
+CPP_HEADERS = $(wildcard ./include/*.hpp ./test/*.hpp) 
 OBJ = ${CPP_SOURCES:.cpp=.o} 
 
 
@@ -26,7 +26,7 @@ run: ${TARTGET}
 	./${TARTGET}
 
 test: ${TARTGET}
-	./${TARTGET} -?
+	./${TARTGET} -d ~/.SpaceVim.d/translate/words.txt 
 
 main: main.cpp
 	clang++ -S  main.cpp -std=c++11

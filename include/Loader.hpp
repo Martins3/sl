@@ -20,6 +20,9 @@ public:
     void load();
     void store();
 
+    void add_one_word(const std::string & w);
+    void add_file(const std::string & path);
+
     std::vector<Word> & getWords(){
         return words;
     }

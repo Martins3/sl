@@ -37,7 +37,6 @@ int Interface::parse_options(int argc, const char *argv[]){
                 break;
             case 'd':
                 path_to_new_words = optarg;
-                cout << "Path to new Words is : "<< path_to_new_words << endl;
                 break;
             case 'w':
                 word = optarg;
@@ -45,9 +44,8 @@ int Interface::parse_options(int argc, const char *argv[]){
                 break;
             case '?':
                 fprintf(stderr,
-                        "usuage is: \n\
-                        ");
-                break;
+                        "usuage is:\n");
+                exit(0);
             default:
                 cout << endl;
                 abort();
@@ -66,13 +64,13 @@ void Interface::handle(){
     }
 
     if(path_to_new_words.size()){
-        cout << "reading data" << endl;
+        L.add_file(path_to_new_words);
+        L.store();
         return;
     }
 
     // add a word
     if(word.size()){
-
         return;
     }
 

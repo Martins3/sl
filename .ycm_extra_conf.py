@@ -4,6 +4,7 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 include_dirs = [
     './include',
+    './test',
 ]
 
 

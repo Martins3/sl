@@ -1,9 +1,10 @@
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
-#include <string>
+
 #include <iostream>
 #include <unistd.h>
 #include <iomanip>
+#include <string>
 
 
 /**
@@ -27,9 +28,9 @@ class Interface{
     int word_id;
     bool forget = false;
 
-    std::string path_to_config = nullptr;
-    std::string path_to_new_words = nullptr;
-    std::string word = nullptr;
+    std::string path_to_config;
+    std::string path_to_new_words;
+    std::string word;
 
     // beatify the print TODO
     void println(const std::string & line, enum COLOR c = RED);
@@ -41,7 +42,7 @@ public:
     Interface(Interface const&)       = delete;
     void operator=(Interface const&)  = delete;
     static Interface& getInstance(){
-        static Interface    instance;
+        static Interface instance;
         return instance;
     }
 
