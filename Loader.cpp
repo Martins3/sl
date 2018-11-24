@@ -136,7 +136,7 @@ void Loader::add_file(const std::string & path){
 }
 
 
-void Loader::check_word(int id, bool forget){
+void Loader::check_word(int id, check_t type){
     // find the word
     int word_num = words.size();
     int i;
@@ -152,6 +152,19 @@ void Loader::check_word(int id, bool forget){
         exit(0);
     }
 
-    Strategy::check_word(words[i], forget);
+    switch(type){
+        case REM:
+            Strategy::check_word(words[i], false);
+            break;
+        case FORGET:
+            Strategy::check_word(words[i], true);
+            break;
+        case SHUTDOWN:
+            words[i].kill();
+            break;
+        case REMOVE:
+            words.erase(words.begin() + i, words.begin() + i + 1);
+            break;
+    }
 }
 

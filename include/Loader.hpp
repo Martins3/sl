@@ -11,6 +11,10 @@
  * 2. if anyone wants to change database, it show use store and load
  */
 
+typedef enum CHECK_TYPE{
+    REM, FORGET, SHUTDOWN, REMOVE
+} check_t;
+
 class Loader{
     static const std::string config_dir;
     std::vector<Word> words;
@@ -23,7 +27,7 @@ public:
     void add_one_word(const std::string & w);
     void add_file(const std::string & path);
 
-    void check_word(int id, bool forget);
+    void check_word(int id, check_t type);
 
     std::vector<Word> & getWords(){
         return words;

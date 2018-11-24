@@ -4,19 +4,13 @@
 #include <iostream>
 #include <unistd.h>
 #include <iomanip>
+#include <Word.hpp>
 #include <string>
 
 
 /**
  * handle user IO and show 
  */
-// const std::string ANSI_COLOR_RED     = "\x1b[31m";
-// const std::string ANSI_COLOR_GREEN   = "\x1b[32m";
-// const std::string ANSI_COLOR_YELLOW  = "\x1b[33m";
-// const std::string ANSI_COLOR_BLUE    = "\x1b[34m";
-// const std::string ANSI_COLOR_MAGENTA = "\x1b[35m";
-// const std::string ANSI_COLOR_CYAN    = "\x1b[36m";
-// const std::string ANSI_COLOR_RESET   = "\x1b[0m";
 
 enum COLOR{
     RED, GREEN, YELLO, BLUE, MAGENTA, CYAN
@@ -28,6 +22,8 @@ class Interface{
     int word_id;
     bool forget;
     bool review;
+    bool shutdown;
+    bool remove;
 
     std::string path_to_config;
     std::string path_to_new_words;
@@ -40,7 +36,19 @@ class Interface{
     }
 
     void print_header(){
-        std::cout << "id:    " << "word:    " << std::endl;
+        std::cout << ANSI_COLOR_RED<< "id\t" << ANSI_COLOR_CYAN << "word" << std::endl;
+    }
+
+    void print_word_info(Word & w){
+        std::cout << ANSI_COLOR_YELLOW << w.get_id() << "\t" << ANSI_COLOR_GREEN << w.get_word() << std::endl;
+    }
+
+    inline void parse_word_id(){
+        word_id = strtol(optarg, NULL, 10);
+        if(word_id == errno){
+            std::cerr << "word id should be a integer" << std::endl;
+            exit(1);
+        }
     }
 
 public:
@@ -53,8 +61,16 @@ public:
 
     int parse_options(int argc, const char *argv[]);
     void handle();
+
+    static const std::string ANSI_COLOR_RED     ;
+    static const std::string ANSI_COLOR_GREEN   ;
+    static const std::string ANSI_COLOR_YELLOW  ;
+    static const std::string ANSI_COLOR_BLUE    ;
+    static const std::string ANSI_COLOR_MAGENTA ;
+    static const std::string ANSI_COLOR_CYAN    ;
+    static const std::string ANSI_COLOR_RESET   ;
 private:
-    Interface():forget(true), review(true){}
+    Interface():review(true), shutdown(false), remove(false){}
 };
 
 #endif

@@ -17,4 +17,18 @@ public:
     static void Ebbinghaus(std::vector<Word> & words);
     static void check_word(Word & w, bool forget);
 };
+
+struct SortByIndex{
+    inline bool operator()(const Word & a, const Word & b){
+        if(a.killed && !b.killed){
+            return false;
+        }
+
+        if(!a.killed && b.killed){
+            return true;
+        }
+
+        return a.index > b.index;
+    }
+};
 #endif

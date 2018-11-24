@@ -30,11 +30,6 @@ public:
     friend struct SortByIndex;
     friend struct SortByDic;
 
-
-    void print_word(){
-        std::cout << id << "\t" << word << std::endl;
-    }
-
     int get_id(){
         return id;
     }
@@ -48,12 +43,10 @@ public:
     }
 
     Word(std::string w, int id);
-    Word() = default; // for json
-    void kill();
-    // remove from database
-    void remove();
-    // user check this word
-    void check(bool forget = true);
+    Word() = default;
+    void kill(){
+        killed = true;
+    }
 };
 
 struct SortById{
@@ -68,9 +61,4 @@ struct SortByDic{
     }
 };
 
-struct SortByIndex{
-    inline bool operator()(const Word & a, const Word & b){
-        return a.index > b.index;
-    }
-};
 #endif

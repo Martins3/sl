@@ -1,6 +1,6 @@
 CC = clang++
 FLAG = -std=c++14 -g -Wall  -DEBUG -pthread -I./include -I./test
-TARTGET = Review.out
+TARTGET = ~/.Application/review
 
 
 CPP_SOURCES = $(wildcard *.cpp ./test/*.cpp)
@@ -23,10 +23,10 @@ ${TARTGET}: ${OBJ}
 
 
 run: ${TARTGET}
-	./${TARTGET}
+	${TARTGET}
 
 test: ${TARTGET}
-	./${TARTGET} -d ~/.SpaceVim.d/translate/words.txt 
+	${TARTGET} -d ~/.SpaceVim.d/translate/words.txt 
 
 main: main.cpp
 	clang++ -S  main.cpp -std=c++11
@@ -37,6 +37,4 @@ main: main.cpp
 clean:
 	rm -f *.o
 	rm -f test/*.o
-	rm -f ./include/*.hpp.gch*
-	rm -f ./test/*.hpp.gch*
 	rm -f ${TARTGET}

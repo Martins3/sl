@@ -210,7 +210,7 @@
 {"id":443,"index":1000,"killed":false,"query_time_point":[],"word":"dissertation"}
 {"id":444,"index":1000,"killed":false,"query_time_point":[],"word":"knack"}
 {"id":445,"index":1000,"killed":false,"query_time_point":[],"word":"steward"}
-{"id":437,"index":1000,"killed":false,"query_time_point":[],"word":"vendor"}
+{"id":437,"index":900,"killed":false,"query_time_point":[],"word":"vendor"}
 {"id":447,"index":1000,"killed":false,"query_time_point":[],"word":"honored"}
 {"id":448,"index":1000,"killed":false,"query_time_point":[],"word":"heterogeneous"}
 {"id":449,"index":1000,"killed":false,"query_time_point":[],"word":"defer"}
@@ -338,7 +338,7 @@
 {"id":118,"index":1000,"killed":false,"query_time_point":[],"word":"increment"}
 {"id":119,"index":1000,"killed":false,"query_time_point":[],"word":"unwary"}
 {"id":120,"index":1000,"killed":false,"query_time_point":[],"word":"nuisance"}
-{"id":26,"index":1000,"killed":false,"query_time_point":[],"word":"grandiose"}
+{"id":26,"index":1400,"killed":false,"query_time_point":[],"word":"grandiose"}
 {"id":18,"index":1000,"killed":false,"query_time_point":[],"word":"permaforst"}
 {"id":19,"index":1000,"killed":false,"query_time_point":[],"word":"translucent"}
 {"id":20,"index":1000,"killed":false,"query_time_point":[],"word":"micron"}
@@ -352,16 +352,13 @@
 {"id":28,"index":1000,"killed":false,"query_time_point":[],"word":"promulgated"}
 {"id":29,"index":1000,"killed":false,"query_time_point":[],"word":"demerger"}
 {"id":30,"index":1000,"killed":false,"query_time_point":[],"word":"encompass"}
-{"id":31,"index":1000,"killed":false,"query_time_point":[],"word":"gory"}
+{"id":31,"index":1100,"killed":false,"query_time_point":[],"word":"gory"}
 {"id":32,"index":1000,"killed":false,"query_time_point":[],"word":"compatible"}
 {"id":33,"index":1000,"killed":false,"query_time_point":[],"word":"twist"}
 {"id":34,"index":900,"killed":false,"query_time_point":[],"word":"predate"}
-{"id":9,"index":1000,"killed":false,"query_time_point":[],"word":"grandiose"}
 {"id":1,"index":1000,"killed":false,"query_time_point":[],"word":"terse"}
 {"id":2,"index":1000,"killed":false,"query_time_point":[],"word":"tyranny"}
-{"id":3,"index":1000,"killed":false,"query_time_point":[],"word":"cunningly"}
 {"id":4,"index":1000,"killed":false,"query_time_point":[],"word":"vigorous"}
-{"id":5,"index":1000,"killed":false,"query_time_point":[],"word":"vendor"}
 {"id":6,"index":1000,"killed":false,"query_time_point":[],"word":"leash"}
 {"id":7,"index":1000,"killed":false,"query_time_point":[],"word":"testament"}
 {"id":8,"index":1000,"killed":false,"query_time_point":[],"word":"retain"}
@@ -467,7 +464,6 @@
 {"id":206,"index":1000,"killed":false,"query_time_point":[],"word":"coherency"}
 {"id":251,"index":1000,"killed":false,"query_time_point":[],"word":"invictus"}
 {"id":252,"index":1000,"killed":false,"query_time_point":[],"word":"disclose"}
-{"id":253,"index":1000,"killed":false,"query_time_point":[],"word":"vendor"}
 {"id":254,"index":1000,"killed":false,"query_time_point":[],"word":"gadget"}
 {"id":255,"index":1000,"killed":false,"query_time_point":[],"word":"obnoxious"}
 {"id":256,"index":1000,"killed":false,"query_time_point":[],"word":"mandatory"}
@@ -535,3 +531,7 @@
 {"id":186,"index":1000,"killed":false,"query_time_point":[],"word":"trampling"}
 {"id":187,"index":1000,"killed":false,"query_time_point":[],"word":"monetized"}
 {"id":188,"index":1000,"killed":false,"query_time_point":[],"word":"hypervisor"}
+{"id":0,"index":1000,"killed":false,"query_time_point":[],"word":"hiccup"}
+{"id":52,"index":1000,"killed":false,"query_time_point":[],"word":"palm"}
+{"id":58,"index":1000,"killed":false,"query_time_point":[],"word":"cavesat"}
+{"id":59,"index":1000,"killed":false,"query_time_point":[],"word":"caveat"}

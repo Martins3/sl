@@ -24,6 +24,7 @@ int test_main(int argc, const char *argv[]){
     if(I.parse_options(argc,  argv) == 0){
         loader.join();
         I.handle();
+        Loader::getInstance().store();
     }else{
         // maybe just stop it !
         loader.join();
@@ -32,34 +33,7 @@ int test_main(int argc, const char *argv[]){
     return 0;
 }
 
-// read the data
-void test_load(){
-    Loader & L = Loader::getInstance();
-    L.load();
-
-    vector<Word> & w = L.getWords();
-
-    for(auto & word : w){
-        word.print_word();
-    }
-}
-
-void add_word_using_file(){
-    Loader & L = Loader::getInstance();
-    L.add_one_word("hhhhhh");
-
-    vector<Word> & w = L.getWords();
-    for(auto & word : w){
-        word.print_word();
-    }
-
-    store_data();
-}
-
-
-
-
-void store_data(){
+void clear_data(){
     Loader::getInstance().store();
 }
 

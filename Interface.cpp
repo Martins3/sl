@@ -9,26 +9,26 @@
 #include <string>
 
 using namespace std;
+const std::string Interface::ANSI_COLOR_RED     = "\x1b[31m";
+const std::string Interface::ANSI_COLOR_GREEN   = "\x1b[32m";
+const std::string Interface::ANSI_COLOR_YELLOW  = "\x1b[33m";
+const std::string Interface::ANSI_COLOR_BLUE    = "\x1b[34m";
+const std::string Interface::ANSI_COLOR_MAGENTA = "\x1b[35m";
+const std::string Interface::ANSI_COLOR_CYAN    = "\x1b[36m";
+const std::string Interface::ANSI_COLOR_RESET   = "\x1b[0m";
 
 int Interface::parse_options(int argc, const char *argv[]){
     int opt;
 
-    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:h")) != EOF){
+    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:hs:x:")) != EOF){
         switch(opt){
             case 'r':
-                word_id = strtol(optarg, NULL, 10);
-                if(word_id == errno){
-                    cout << "word is should be a integer" << endl;
-                    exit(0);
-                }
+                parse_word_id();
+                forget = false;
                 review = false;
                 break;
             case 'f':
-                word_id = strtol(optarg, NULL, 10);
-                if(word_id == errno){
-                    cout << "word id should be a integer" << endl;
-                    exit(0);
-                }
+                parse_word_id();
                 forget = true;
                 review = false;
                 break;
@@ -38,6 +38,14 @@ int Interface::parse_options(int argc, const char *argv[]){
                 break;
             case 'd':
                 path_to_new_words = optarg;
+                break;
+            case 'x':
+                parse_word_id();
+                remove = true;
+                break;
+            case 's':
+                parse_word_id();
+                shutdown = true;
                 break;
             case 'w':
                 word = optarg;
@@ -51,6 +59,8 @@ int Interface::parse_options(int argc, const char *argv[]){
                         -f forget\n\
                         -c load new configuration file\n\
                         -d add a file of words\n\
+                        -s remove one word from database permanentely\n\
+                        -x forbid this word to appear recently\n\
                         -w add one word\n");
 
                 exit(0);
@@ -68,21 +78,28 @@ void Interface::handle(){
 
     if(path_to_config.size()){
         // TODO L.read_config
-        L.store();
         return;
     }
 
 
     if(path_to_new_words.size()){
         L.add_file(path_to_new_words);
-        L.store();
         return;
     }
 
     // add a word
     if(word.size()){
         L.add_one_word(word);
-        L.store();
+        return;
+    }
+
+    if(shutdown){
+        L.check_word(word_id, SHUTDOWN);
+        return;
+    }
+
+    if(remove){
+        L.check_word(word_id, REMOVE);
         return;
     }
 
@@ -94,20 +111,19 @@ void Interface::handle(){
 
         print_header();
         for (int i = 0; i < count; i++) {
-            words[i].print_word();
+            print_word_info(words[i]);
         }
-        return;
+        exit(0);
     }
 
     // show words
     if(forget){
-        L.check_word(word_id, false);
+        L.check_word(word_id, FORGET);
     }
 
     else{
-        L.check_word(word_id, true);
+        L.check_word(word_id, REM);
     }
-    L.store();
 }
 
 
