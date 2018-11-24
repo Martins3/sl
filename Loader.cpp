@@ -1,9 +1,12 @@
 #include <Loader.hpp>
 #include <Word.hpp> // 用于提供friend 信息
 #include <User.hpp>
+#include <Strategy.hpp>
+
 #include <fstream>
 #include <set>
 #include <string>
+
 
 using json = nlohmann::json;
 using namespace std;
@@ -78,7 +81,9 @@ void Loader::add_one_word(const std::string & w){
         id[words[i].get_id()] = true;
         // check if alread exits
         if(w == words[i].get_word()){
-            exit(0);
+            cerr << "This word has already been in the database" << endl;
+            Strategy::check_word(words[i], true);
+            return;
         }
     }
 
@@ -109,9 +114,11 @@ void Loader::add_file(const std::string & path){
         }
     }
 
-    set<string> sorted_words;
+    // word and location
+    map<string,int> sorted_words;
+    int loc = 0;
     for(auto w : words){
-        sorted_words.insert(w.get_word());
+        sorted_words.insert(make_pair(w.get_word(), loc ++));
     }
 
 
@@ -121,11 +128,13 @@ void Loader::add_file(const std::string & path){
         auto f = sorted_words.find(line);
         if(f == sorted_words.end()){
             words.emplace_back(line, ++max_id);
+            sorted_words.insert(make_pair(line, loc++));
         }else{
-            sorted_words.insert(line);
+            Strategy::check_word(words[f->second], true);
         }
     }
 }
+
 
 void Loader::check_word(int id, bool forget){
     // find the word
@@ -133,6 +142,7 @@ void Loader::check_word(int id, bool forget){
     int i;
     for (i = 0; i < word_num ; i++) {
         if(words[i].get_id() == id){
+            cout << "check : " << words[i].get_word() << endl;
             break;
         }
     }
@@ -142,9 +152,6 @@ void Loader::check_word(int id, bool forget){
         exit(0);
     }
 
-    if(forget){
-        words[i].add_index(100);
-    }else{
-        words[i].add_index(-100);
-    }
+    Strategy::check_word(words[i], forget);
 }
+

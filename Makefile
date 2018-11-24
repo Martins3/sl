@@ -36,5 +36,7 @@ main: main.cpp
 
 clean:
 	rm -f *.o
-	rm -f ./Include/*.hpp.gch*
+	rm -f test/*.o
+	rm -f ./include/*.hpp.gch*
+	rm -f ./test/*.hpp.gch*
 	rm -f ${TARTGET}

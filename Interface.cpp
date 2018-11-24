@@ -12,10 +12,8 @@ using namespace std;
 
 int Interface::parse_options(int argc, const char *argv[]){
     int opt;
-   cout << "forget" << endl;
-   cout << path_to_config.size() << endl;
 
-    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:?")) != EOF){
+    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:h")) != EOF){
         switch(opt){
             case 'r':
                 word_id = strtol(optarg, NULL, 10);
@@ -23,7 +21,6 @@ int Interface::parse_options(int argc, const char *argv[]){
                     cout << "word is should be a integer" << endl;
                     exit(0);
                 }
-                cout << "change it" << endl;
                 review = false;
                 break;
             case 'f':
@@ -33,7 +30,6 @@ int Interface::parse_options(int argc, const char *argv[]){
                     exit(0);
                 }
                 forget = true;
-                cout << "change it" << endl;
                 review = false;
                 break;
             case 'c':
@@ -47,9 +43,16 @@ int Interface::parse_options(int argc, const char *argv[]){
                 word = optarg;
                 cout << "Added words is : "<< word << endl;
                 break;
-            case '?':
-                fprintf(stderr,
-                        "usuage is:\n");
+            case 'h':
+                fprintf(stderr, "\
+                    usuage is:\n\
+                        -h show this help information\n\
+                        -r remember\n\
+                        -f forget\n\
+                        -c load new configuration file\n\
+                        -d add a file of words\n\
+                        -w add one word\n");
+
                 exit(0);
             default:
                 cout << endl;
@@ -61,16 +64,10 @@ int Interface::parse_options(int argc, const char *argv[]){
 
 
 void Interface::handle(){
-    Strategy & S = Strategy::getInstance();
     Loader & L = Loader::getInstance();
 
-
-   cout << "forget" << endl;
-   cout << path_to_config.size() << endl;
     if(path_to_config.size()){
         // TODO L.read_config
-
-        cout << "forget" << endl;
         L.store();
         return;
     }
@@ -89,21 +86,20 @@ void Interface::handle(){
         return;
     }
 
-   cout << "forget" << endl;
-   cout << review << endl;
-
     if(review){
         // just show words
         vector<Word> & words = L.getWords();
-        S.Ebbinghaus(words);
+        Strategy::Ebbinghaus(words);
         int count = L.getUserConfig().get_show_limitation();
 
         print_header();
         for (int i = 0; i < count; i++) {
             words[i].print_word();
         }
+        return;
     }
 
+    // show words
     if(forget){
         L.check_word(word_id, false);
     }
@@ -111,6 +107,7 @@ void Interface::handle(){
     else{
         L.check_word(word_id, true);
     }
+    L.store();
 }
 
 

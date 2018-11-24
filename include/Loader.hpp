@@ -34,12 +34,12 @@ public:
     }
 
     static Loader& getInstance(){
-        static Loader    instance;
+        static Loader instance;
         return instance;
     }
     Loader(Loader const&)       = delete;
     void operator=(Loader const&)  = delete;
 private:
-    Loader() = default;
+    Loader()=default;
 };
 #endif

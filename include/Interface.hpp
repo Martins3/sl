@@ -54,7 +54,7 @@ public:
     int parse_options(int argc, const char *argv[]);
     void handle();
 private:
-    Interface()=default;
+    Interface():forget(true), review(true){}
 };
 
 #endif
