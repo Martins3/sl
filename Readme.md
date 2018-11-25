@@ -1,27 +1,25 @@
 # Sl
 A tool silimilar to [sl](https://github.com/mtoyoda/sl), but used for review english words
 
-## How to use it
-* command line:
-* -d add file to database
-* -c path to configuration, if not seted, use default 
-* -f forget some words
-* -r remember some words
-* -w add one word to database
+## Install
+```
+git clone https://github.com/Martins3/sl
+cd sl
+# modify Makefile to specific the target
+make
+```
 
+## How to use it
+review -h
 
 ## TODO
-2. Define Loader read to read data base
-    1. for binary
-    2. for JSON
-3. Extract data from [ECDICT](https://github.com/skywind3000/ECDICT)
-5. analyze words
+3. ~~Extract data from [ECDICT](https://github.com/skywind3000/ECDICT)~~
+5. Analyze words
     1. how many times forget
-    2. a chart
-6. query the ECDICT
-7. staragy:
-    1. every one can define one
-8. statistic information
-10. not only can I record words, but also can I record sentence !
+    2. make a chart
+7. Add staragy API:
+    1. every one can define his own strategy just by modify one file
+8. Review notes(anything can be printed)
+9. Reivew links
 
 ## Bugs
