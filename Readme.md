@@ -13,6 +13,11 @@ make
 review -h
 
 ## TODO
+1. Divide the review into two parts,  one is index, another is randomnized
+    1. we need better way to read user config, just read file and beatify it
+    2. more efficient add user config by save files
+4. not only use id, but can types words to it.
+
 3. ~~Extract data from [ECDICT](https://github.com/skywind3000/ECDICT)~~
 5. Analyze words
     1. how many times forget

@@ -3,6 +3,7 @@
 #include <User.hpp>
 #include <Strategy.hpp>
 
+#include <iomanip>
 #include <fstream>
 #include <set>
 #include <string>
@@ -20,7 +21,9 @@ void to_json(json& j, const Word& p){
         {"index", p.index},
         {"id", p.id},
         {"word", p.word},
-        {"query_time_point", p.query_time_point}, {"killed", p.killed}, };
+        {"query_time_point", p.query_time_point},
+        {"killed", p.killed}
+    };
 }
 
 void from_json(const json& j, Word& p){
@@ -34,11 +37,15 @@ void from_json(const json& j, Word& p){
 void to_json(json& j, const User& u){
     j =  json{
         {"show_limitation", u.show_limitation},
+        {"show_word_id", u.show_word_id},
+        {"random_show_limitation", u.random_show_limitation},
     };
 }
 
 void from_json(const json& j, User& p){
     j.at("show_limitation").get_to(p.show_limitation);
+    j.at("show_word_id").get_to(p.show_word_id);
+    j.at("random_show_limitation").get_to(p.random_show_limitation);
 }
 
 
@@ -52,9 +59,18 @@ void Loader::store(){
 
     outfile = std::ofstream(config_dir + "user.json");
     json j = user;
-    outfile << j.dump() << endl;
+    outfile << std::setw(4) << j << std::endl;
     outfile.close();
 }
+
+void Loader::set_default_config(){
+    User user;
+    ofstream outfile = std::ofstream(config_dir + "user.json");
+    json j = user;
+    outfile << std::setw(4) << j << std::endl;
+    outfile.close();
+}
+
 
 
 void Loader::load(){
@@ -66,11 +82,15 @@ void Loader::load(){
         Word w = j;
         words.push_back(w);
     }
+    infile.close();
+}
 
-    infile = std::ifstream(config_dir + "user.json");
-    std::getline(infile, line);
-    json j = json::parse(line);
+void Loader::load_config(){
+    std::ifstream infile = std::ifstream(config_dir + "user.json");
+    json j;
+    infile >> j;
     user = j;
+    infile.close();
 }
 
 void Loader::add_one_word(const std::string & w){

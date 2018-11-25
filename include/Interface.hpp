@@ -1,6 +1,7 @@
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
 
+#include <Loader.hpp>
 #include <iostream>
 #include <unistd.h>
 #include <iomanip>
@@ -35,21 +36,22 @@ class Interface{
         std::cout << std::left << std::setw(width) << std::setfill(' ') << t;
     }
 
-    void print_header(){
-        std::cout << ANSI_COLOR_RED<< "id\t" << ANSI_COLOR_CYAN << "word" << std::endl;
-    }
-
-    void print_word_info(Word & w){
-        std::cout << ANSI_COLOR_YELLOW << w.get_id() << "\t" << ANSI_COLOR_GREEN << w.get_word() << std::endl;
-    }
-
-    inline void parse_word_id(){
-        word_id = strtol(optarg, NULL, 10);
-        if(word_id == errno){
-            std::cerr << "word id should be a integer" << std::endl;
-            exit(1);
+    void print_header(bool id){
+        Loader::getInstance().getUserConfig().is_show_word_id();
+        if(id){
+            std::cout << ANSI_COLOR_RED<< "id\t";
         }
+        std::cout << ANSI_COLOR_CYAN << "word" << std::endl;
     }
+
+    void print_word_info(Word & w, bool id){
+        if(id){
+            std::cout << ANSI_COLOR_YELLOW << w.get_id() << "\t";
+        }
+        std::cout << ANSI_COLOR_GREEN << w.get_word() << std::endl;
+    }
+
+    void parse_word_id();
 
 public:
     Interface(Interface const&)       = delete;

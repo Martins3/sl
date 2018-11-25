@@ -5,4 +5,5 @@ void test_load();
 void add_word_using_file();
 int test_main(int argc, const char *argv[]);
 
+void clear_user_data();
 #endif /* end of include guard: TEST_H */

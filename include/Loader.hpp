@@ -22,13 +22,14 @@ class Loader{
 public:
     // load should be done at begining 
     void load();
+    void load_config();
     void store();
 
     void add_one_word(const std::string & w);
     void add_file(const std::string & path);
 
     void check_word(int id, check_t type);
-
+    void set_default_config();
     std::vector<Word> & getWords(){
         return words;
     }
