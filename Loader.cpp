@@ -168,21 +168,45 @@ void Loader::check_word(int id, check_t type){
     }
     
     if(i == word_num){
-        fprintf(stderr, "Error: can not find this word");
+        fprintf(stderr, "Error: can not find word with id");
         exit(0);
     }
+    handle_word(words[i], type);
+}
 
+void Loader::check_word(std::string & word, check_t type){
+    int word_num = words.size();
+    int i;
+    for (i = 0; i < word_num ; i++) {
+        if(words[i].get_word() == word){
+            cout << "check : " << word << endl;
+            break;
+        }
+    }
+    
+    if(i == word_num){
+        fprintf(stderr, "Check you spell");
+        exit(0);
+    }
+    handle_word(words[i], type);
+}
+
+void Loader::handle_word(Word & word, check_t type){
     switch(type){
         case REM:
-            Strategy::check_word(words[i], false);
+            Strategy::check_word(word, false);
             break;
         case FORGET:
-            Strategy::check_word(words[i], true);
+            Strategy::check_word(word, true);
             break;
         case SHUTDOWN:
-            words[i].kill();
+            word.kill();
             break;
         case REMOVE:
+            int i;
+            for (i = 0; i < words.size(); i++) {
+                if(words[i].get_id() == word.get_id()) break;
+            }
             words.erase(words.begin() + i, words.begin() + i + 1);
             break;
     }

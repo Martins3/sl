@@ -90,6 +90,8 @@ int Interface::parse_options(int argc, const char *argv[]){
 
 void Interface::handle(){
     Loader & L = Loader::getInstance();
+    User & U = L.getUserConfig();
+    bool id = U.is_show_word_id();
 
     if(path_to_config.size()){
         // TODO L.read_config
@@ -102,26 +104,33 @@ void Interface::handle(){
         return;
     }
 
+
+    if(shutdown){
+        if(U.is_show_word_id()){
+            L.check_word(word_id, SHUTDOWN);
+        }else{
+            L.check_word(word, SHUTDOWN);
+        }
+        return;
+    }
+
+    if(remove){
+        if(U.is_show_word_id()){
+            L.check_word(word_id,REMOVE);
+        }else{
+            L.check_word(word, REMOVE);
+        }
+        return;
+    }
+
     // add a word
     if(word.size()){
         L.add_one_word(word);
         return;
     }
 
-    if(shutdown){
-        L.check_word(word_id, SHUTDOWN);
-        return;
-    }
-
-    if(remove){
-        L.check_word(word_id, REMOVE);
-        return;
-    }
-
     if(review){
         // just show words
-        User & U = L.getUserConfig();
-        bool id = U.is_show_word_id();
         vector<Word> & words = L.getWords();
         Strategy::Ebbinghaus(words);
         int count = L.getUserConfig().get_show_limitation();
@@ -136,13 +145,14 @@ void Interface::handle(){
         int r_limit  = U.get_random_show_limitation();
 
         if(r_limit > 0){
-            cout << ANSI_COLOR_BLUE << "--------\n" << endl; 
+            cout << ANSI_COLOR_BLUE
+                 << "----------------\n" << endl; 
         }
 
+        srand (time(NULL));
         for (int i = 0; i < r_limit ; i++) {
             print_word_info(words[rand() % len], id);
         }
-        
 
         exit(0);
     }
@@ -156,5 +166,4 @@ void Interface::handle(){
         L.check_word(word_id, REM);
     }
 }
-
 

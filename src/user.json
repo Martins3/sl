@@ -1,5 +1,5 @@
 {
     "random_show_limitation": 3,
     "show_limitation": 10,
-    "show_word_id": true
+    "show_word_id": false
 }

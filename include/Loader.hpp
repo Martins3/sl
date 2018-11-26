@@ -29,6 +29,9 @@ public:
     void add_file(const std::string & path);
 
     void check_word(int id, check_t type);
+    void check_word(std::string & word, check_t type);
+    void handle_word(Word & word, check_t type);
+
     void set_default_config();
     std::vector<Word> & getWords(){
         return words;
