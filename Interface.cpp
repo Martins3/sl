@@ -63,6 +63,7 @@ int Interface::parse_options(int argc, const char *argv[]){
                 shutdown = true;
                 break;
             case 'w':
+                add = true;
                 word = optarg;
                 cout << "Added words is : "<< word << endl;
                 break;
@@ -74,8 +75,8 @@ int Interface::parse_options(int argc, const char *argv[]){
                         -f forget\n\
                         -c load new configuration file\n\
                         -d add a file of words\n\
-                        -s remove one word from database permanentely\n\
-                        -x forbid this word to appear recently\n\
+                        -x remove one word from database permanentely\n\
+                        -s forbid this word to appear recently\n\
                         -w add one word\n");
 
                 exit(0);
@@ -94,7 +95,7 @@ void Interface::handle(){
     bool id = U.is_show_word_id();
 
     if(path_to_config.size()){
-        // TODO L.read_config
+        // TODO there is no need to doing things so complex
         return;
     }
 
@@ -124,7 +125,7 @@ void Interface::handle(){
     }
 
     // add a word
-    if(word.size()){
+    if(add){
         L.add_one_word(word);
         return;
     }
@@ -137,6 +138,7 @@ void Interface::handle(){
 
         print_header(id);
         for (int i = 0; i < count; i++) {
+            words[i].add_index(-1);
             print_word_info(words[i], id);
         }
 
@@ -151,19 +153,28 @@ void Interface::handle(){
 
         srand (time(NULL));
         for (int i = 0; i < r_limit ; i++) {
-            print_word_info(words[rand() % len], id);
+            int inx = rand() % len;
+            words[inx].add_index(-1);
+            print_word_info(words[inx], id);
         }
-
-        exit(0);
+        // exit(0);
+        return;
     }
 
     // show words
     if(forget){
-        L.check_word(word_id, FORGET);
+        if(U.is_show_word_id()){
+            L.check_word(word_id,FORGET);
+        }else{
+            L.check_word(word, FORGET);
+        }
     }
-
     else{
-        L.check_word(word_id, REM);
+        if(U.is_show_word_id()){
+            L.check_word(word_id, REM);
+        }else{
+            L.check_word(word, REM);
+        }
     }
 }
 

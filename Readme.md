@@ -28,7 +28,21 @@ review -h
 7. Add staragy API:
     1. every one can define his own strategy just by modify one file
 8. Review notes(anything can be printed)
+    1. only one notes is showed
+    2. cann't show in recent days
+    3. propotion of words and notes, if review words 10 times, then it is very likely to review notes
 9. Reivew links
 10. Realease with Appimgage
+11. Add a mode `learn`, go to interactive mode, and show words one by one
+    1. in this mode, only words are shoulde, notes are excluded
+12. Newly added words should review soon.
 
 ## Bugs
+1. There is a risk that write to word.json is not reliable.
+    1. maybe caused by write amtomicity
+2. There are many bugs are caused by forget `make clean`, change headers, make do nothing, this rather stupid, we have to refine Makefile
+3. I don't know why sort makes no sense, since no write to disk, make a random to write to disk
+
+
+## Optimazation
+1. It's rather stupid to read the whole database and write back when updating one line

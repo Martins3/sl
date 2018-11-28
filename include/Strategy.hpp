@@ -1,8 +1,6 @@
 #ifndef STRATEGY_HPP
 #define STRATEGY_HPP
 
-#include "Word.hpp"
-#include "User.hpp"
 
 
 /**
@@ -12,6 +10,11 @@
  *
  * All the methods are just static methods
  */
+
+#include "Word.hpp"
+#include "User.hpp"
+#include <ctime>
+
 class Strategy{
 public:
     static void Ebbinghaus(std::vector<Word> & words);
@@ -28,7 +31,7 @@ struct SortByIndex{
             return true;
         }
 
-        return a.index > b.index;
+        return a.index  > b.index;
     }
 };
 #endif

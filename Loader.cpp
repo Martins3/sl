@@ -18,20 +18,20 @@ const std::string Loader::config_dir = "/home/shen/Core/sl/src/";
 
 void to_json(json& j, const Word& p){
     j =  json{
+        {"word", p.word},
         {"index", p.index},
         {"id", p.id},
-        {"word", p.word},
+        {"killed", p.killed},
         {"query_time_point", p.query_time_point},
-        {"killed", p.killed}
     };
 }
 
 void from_json(const json& j, Word& p){
+    j.at("word").get_to(p.word);
     j.at("index").get_to(p.index);
     j.at("id").get_to(p.id);
-    j.at("word").get_to(p.word);
-    j.at("query_time_point").get_to(p.query_time_point);
     j.at("killed").get_to(p.killed);
+    j.at("query_time_point").get_to(p.query_time_point);
 }
 
 void to_json(json& j, const User& u){
@@ -162,7 +162,7 @@ void Loader::check_word(int id, check_t type){
     int i;
     for (i = 0; i < word_num ; i++) {
         if(words[i].get_id() == id){
-            cout << "check : " << words[i].get_word() << endl;
+            cout << "id check : " << words[i].get_word() << endl;
             break;
         }
     }
@@ -179,7 +179,7 @@ void Loader::check_word(std::string & word, check_t type){
     int i;
     for (i = 0; i < word_num ; i++) {
         if(words[i].get_word() == word){
-            cout << "check : " << word << endl;
+            cout << "word check : " << word << endl;
             break;
         }
     }
@@ -200,7 +200,7 @@ void Loader::handle_word(Word & word, check_t type){
             Strategy::check_word(word, true);
             break;
         case SHUTDOWN:
-            word.kill();
+           word.kill();
             break;
         case REMOVE:
             int i;

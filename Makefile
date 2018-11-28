@@ -18,7 +18,7 @@ ${TARTGET}: ${OBJ}
     # $@ evaluates to all
     # $< evaluates to library.cpp
     # $^ evaluates to library.cpp main.cpp
-%.o: %.cpp ${HEADERS}
+%.o: %.cpp ${CPP_HEADERS}
 	${CC} ${FLAG} -c $< -o $@
 
 

@@ -25,6 +25,7 @@ class Interface{
     bool review;
     bool shutdown;
     bool remove;
+    bool add;
 
     std::string path_to_config;
     std::string path_to_new_words;
@@ -72,7 +73,7 @@ public:
     static const std::string ANSI_COLOR_CYAN    ;
     static const std::string ANSI_COLOR_RESET   ;
 private:
-    Interface():review(true), shutdown(false), remove(false){}
+    Interface():review(true), shutdown(false), remove(false), add(false){}
 };
 
 #endif
