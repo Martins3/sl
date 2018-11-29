@@ -14,8 +14,7 @@ void Strategy::check_word(Word & w, bool forget){
         // TODO: more complex startegy will implement later
         // w.query_time_point.clear();
         // w.query_time_point.push_back(make_pair(time(nullptr), true));
-        w.kill();
-        auto ts = w.query_time_point;
+        auto & ts = w.query_time_point;
         if(w.query_time_point.empty()){
             w.add_index(-100);
             ts.push_back(make_pair(time(nullptr), true));

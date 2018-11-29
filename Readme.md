@@ -36,6 +36,8 @@ review -h
 11. Add a mode `learn`, go to interactive mode, and show words one by one
     1. in this mode, only words are shoulde, notes are excluded
 12. Newly added words should review soon.
+13. Make all the strategy into one file and use interface to handle it, by init different object, we use different strategy.
+14. More easy to install for common users
 
 ## Bugs
 1. There is a risk that write to word.json is not reliable.
