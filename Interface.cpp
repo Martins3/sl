@@ -138,7 +138,7 @@ void Interface::handle(){
 
         print_header(id);
         for (int i = 0; i < count; i++) {
-            words[i].add_index(-1);
+            // words[i].add_index(-1);
             print_word_info(words[i], id);
         }
 
@@ -154,7 +154,7 @@ void Interface::handle(){
         srand (time(NULL));
         for (int i = 0; i < r_limit ; i++) {
             int inx = rand() % len;
-            words[inx].add_index(-1);
+            // words[inx].add_index(-1);
             print_word_info(words[inx], id);
         }
         // exit(0);

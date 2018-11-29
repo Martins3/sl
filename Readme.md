@@ -39,6 +39,15 @@ review -h
 13. Make all the strategy into one file and use interface to handle it, by init different object, we use different strategy.
 14. More easy to install for common users
 
+15. Create a json file to recore user action
+    1. how many words remember this week
+    2. how many words added
+    3. and so on
+    4. we need to add new class for this
+16. customer programmer provide .so or .dll file
+    1. index is use less now
+    2. a `integer` is provide, and user can read this
+
 ## Bugs
 1. There is a risk that write to word.json is not reliable.
     1. maybe caused by write amtomicity

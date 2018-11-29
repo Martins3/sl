@@ -15,6 +15,8 @@
 #include "User.hpp"
 #include <ctime>
 
+// should make it singleton
+// totally virtual
 class Strategy{
 public:
     static void Ebbinghaus(std::vector<Word> & words);
