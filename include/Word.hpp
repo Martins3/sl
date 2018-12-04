@@ -17,7 +17,7 @@ class Word{
     int id;
     int index;
     std::string word;
-    bool killed;
+    int flag;
     std::vector<std::pair<time_t, bool> > query_time_point;
 public:
     friend class Strategy;
@@ -31,19 +31,12 @@ public:
         return id;
     }
 
-    void add_index(int i){
-        index += i;
-    }
-
     std::string get_word(){
         return word;
     }
 
     Word(std::string w, int id);
     Word() = default;
-    void kill(){
-        killed = true;
-    }
 };
 
 struct SortById{
@@ -55,6 +48,12 @@ struct SortById{
 struct SortByDic{
     inline bool operator()(const Word & a, const Word & b){
         return a.word > b.word;
+    }
+};
+
+struct SortByIndex{
+    inline bool operator()(const Word & a, const Word & b){
+        return a.index > b.index;
     }
 };
 

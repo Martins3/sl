@@ -42,4 +42,5 @@ void clear_user_data(){
     Loader::getInstance().set_default_config();
 }
 
+
 #endif

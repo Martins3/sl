@@ -133,7 +133,9 @@ void Interface::handle(){
     if(review){
         // just show words
         vector<Word> & words = L.getWords();
-        Strategy::Ebbinghaus(words);
+        // sort it
+
+        sort(words.begin(), words.end(), SortByIndex());
         int count = L.getUserConfig().get_show_limitation();
 
         print_header(id);
@@ -157,6 +159,7 @@ void Interface::handle(){
             // words[inx].add_index(-1);
             print_word_info(words[inx], id);
         }
+
         // exit(0);
         return;
     }

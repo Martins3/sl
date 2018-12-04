@@ -1,7 +1,7 @@
 #include <Loader.hpp>
 #include <Word.hpp> // 用于提供friend 信息
 #include <User.hpp>
-#include <Strategy.hpp>
+#include <api/Strategy.hpp>
 
 #include <iomanip>
 #include <fstream>
@@ -21,7 +21,7 @@ void to_json(json& j, const Word& p){
         {"word", p.word},
         {"index", p.index},
         {"id", p.id},
-        {"killed", p.killed},
+        {"killed", p.flag},
         {"query_time_point", p.query_time_point},
     };
 }
@@ -30,7 +30,7 @@ void from_json(const json& j, Word& p){
     j.at("word").get_to(p.word);
     j.at("index").get_to(p.index);
     j.at("id").get_to(p.id);
-    j.at("killed").get_to(p.killed);
+    j.at("killed").get_to(p.flag);
     j.at("query_time_point").get_to(p.query_time_point);
 }
 
@@ -194,10 +194,10 @@ void Loader::check_word(std::string & word, check_t type){
 void Loader::handle_word(Word & word, check_t type){
     switch(type){
         case REM:
-            Strategy::check_word(word, false);
+            word.query_time_point.push_back(make_pair(time(nullptr), false));
             break;
         case FORGET:
-            Strategy::check_word(word, true);
+            word.query_time_point.push_back(make_pair(time(nullptr), true));
             break;
         case SHUTDOWN:
            word.kill();
