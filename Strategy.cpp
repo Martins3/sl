@@ -14,7 +14,6 @@ inline int get_day(long now, long time){
 }
 
 void Strategy::sort(std::vector<Word> & words, int count){
-    const int BASE = 1000;
     long now = time(nullptr);
     count = min((int)words.size(), count);
 

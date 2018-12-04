@@ -138,7 +138,8 @@ void Loader::add_file(const std::string & path){
     map<string,int> sorted_words;
     int loc = 0;
     for(auto w : words){
-        sorted_words.insert(make_pair(w.get_word(), loc ++));
+        sorted_words.insert(make_pair(w.get_word(), loc));
+        loc ++;
     }
 
 
@@ -147,8 +148,10 @@ void Loader::add_file(const std::string & path){
     while (std::getline(infile, line)){
         auto f = sorted_words.find(line);
         if(f == sorted_words.end()){
-            words.emplace_back(line, ++max_id);
-            sorted_words.insert(make_pair(line, loc++));
+            max_id ++;
+            words.emplace_back(line, max_id);
+            sorted_words.insert(make_pair(line, loc));
+            loc ++;
         }else{
             words[f->second].check(true);
         }

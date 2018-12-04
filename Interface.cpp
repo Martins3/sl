@@ -35,8 +35,11 @@ void Interface::parse_word_id(){
 int Interface::parse_options(int argc, const char *argv[]){
     int opt;
 
-    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:hs:x:")) != EOF){
+    while ((opt = getopt(argc,(char **)argv,"r:f:c:d:w:hs:x:i")) != EOF){
         switch(opt){
+            case 'i':
+                interactive = true;
+                break;
             case 'r':
                 parse_word_id();
                 forget = false;
@@ -93,6 +96,30 @@ void Interface::handle(){
     Loader & L = Loader::getInstance();
     User & U = L.getUserConfig();
     bool id = U.is_show_word_id();
+
+    if(interactive){
+        vector<Word> & words = L.getWords();
+        int len = words.size();
+        srand (time(NULL));
+        while(true){
+            int inx = rand() % len;
+            Word & w = words[inx];
+            print_word_info(w, false);
+            string input;
+            getline(std::cin, input);
+            if(input == "Y"){
+                w.check(false);
+            }else if(input == "N"){
+                w.check(true);
+            }else if(input == "GG"){
+                break;
+            }else{
+                cerr << "Specification:\nY : yes\nN : No\nGG : over" << endl;
+                break;
+            }
+        }
+        return;
+    }
 
     if(path_to_config.size()){
         // TODO there is no need to doing things so complex

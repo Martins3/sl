@@ -4,7 +4,7 @@ TARTGET = ~/.Application/review
 
 
 CPP_SOURCES = $(wildcard *.cpp ./test/*.cpp)
-CPP_HEADERS = $(wildcard ./include/*.hpp ./test/*.hpp) 
+CPP_HEADERS = $(wildcard ./include/*.hpp ./include/api/*.hpp ./test/*.hpp) 
 OBJ = ${CPP_SOURCES:.cpp=.o} 
 
 

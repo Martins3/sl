@@ -12,12 +12,9 @@
 
 
 class Word{
-    // config
-    static const int INDEX_BASE;
-
+    std::string word;
     int id;
     int index;
-    std::string word;
     // bool killed;
     int flag;
     std::vector<std::pair<time_t, bool> > query_time_point;
@@ -58,10 +55,12 @@ public:
     }
 
     void check(bool forget){
-        query_time_point.push_back(std::make_pair(time(nullptr), false));
+        query_time_point.push_back(std::make_pair(time(nullptr), forget));
     }
 
-    Word(std::string w, int id):id(id), word(w){};
+    Word(std::string w, int id): word(w), id(id){
+        query_time_point.push_back(std::make_pair(time(nullptr), true));
+    };
     Word() = default;
 };
 
