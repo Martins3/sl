@@ -16,9 +16,8 @@
 #include <ctime>
 
 class Strategy{
-    static int get_index(std::vector<std::pair<time_t, bool> > query_time_point){
-        return 0;
-    }
+public:
+    static void sort(std::vector<Word> & w, int count);
 };
 
 

@@ -1,5 +1,5 @@
 #include <Interface.hpp>
-#include <Strategy.hpp>
+#include <api/Strategy.hpp>
 #include <Query.hpp>
 #include <Loader.hpp>
 #include <iostream>
@@ -133,10 +133,8 @@ void Interface::handle(){
     if(review){
         // just show words
         vector<Word> & words = L.getWords();
-        // sort it
-
-        sort(words.begin(), words.end(), SortByIndex());
         int count = L.getUserConfig().get_show_limitation();
+        Strategy::sort(words, count);
 
         print_header(id);
         for (int i = 0; i < count; i++) {
@@ -156,11 +154,9 @@ void Interface::handle(){
         srand (time(NULL));
         for (int i = 0; i < r_limit ; i++) {
             int inx = rand() % len;
-            // words[inx].add_index(-1);
             print_word_info(words[inx], id);
         }
 
-        // exit(0);
         return;
     }
 

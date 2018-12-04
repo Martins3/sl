@@ -48,6 +48,8 @@ review -h
     1. index is use less now
     2. a `integer` is provide, and user can read this
 
+17. Use vector<Word> to vector<Word &>
+
 ## Bugs
 1. There is a risk that write to word.json is not reliable.
     1. maybe caused by write amtomicity

@@ -21,7 +21,7 @@ void to_json(json& j, const Word& p){
         {"word", p.word},
         {"index", p.index},
         {"id", p.id},
-        {"killed", p.flag},
+        {"flag", p.flag},
         {"query_time_point", p.query_time_point},
     };
 }
@@ -30,7 +30,7 @@ void from_json(const json& j, Word& p){
     j.at("word").get_to(p.word);
     j.at("index").get_to(p.index);
     j.at("id").get_to(p.id);
-    j.at("killed").get_to(p.flag);
+    j.at("flag").get_to(p.flag);
     j.at("query_time_point").get_to(p.query_time_point);
 }
 
@@ -73,7 +73,7 @@ void Loader::set_default_config(){
 
 
 
-void Loader::load(){
+void Loader::load_words(){
     std::ifstream infile(config_dir + "words.json");
     string line;
     // TODO: should not restricted to a line
@@ -102,7 +102,7 @@ void Loader::add_one_word(const std::string & w){
         // check if alread exits
         if(w == words[i].get_word()){
             cerr << "This word has already been in the database" << endl;
-            Strategy::check_word(words[i], true);
+            words[i].check(true);
             return;
         }
     }
@@ -150,7 +150,7 @@ void Loader::add_file(const std::string & path){
             words.emplace_back(line, ++max_id);
             sorted_words.insert(make_pair(line, loc++));
         }else{
-            Strategy::check_word(words[f->second], true);
+            words[f->second].check(true);
         }
     }
 }
@@ -194,13 +194,13 @@ void Loader::check_word(std::string & word, check_t type){
 void Loader::handle_word(Word & word, check_t type){
     switch(type){
         case REM:
-            word.query_time_point.push_back(make_pair(time(nullptr), false));
+            word.check(false);
             break;
         case FORGET:
-            word.query_time_point.push_back(make_pair(time(nullptr), true));
+            word.check(true);
             break;
         case SHUTDOWN:
-           word.kill();
+            // TODO : use change mode instead of reading the line.
             break;
         case REMOVE:
             int i;
@@ -211,4 +211,5 @@ void Loader::handle_word(Word & word, check_t type){
             break;
     }
 }
+
 

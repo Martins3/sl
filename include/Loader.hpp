@@ -21,12 +21,13 @@ class Loader{
     User user;
 public:
     // load should be done at begining 
-    void load();
+    void load_words();
     void load_config();
     void store();
 
     void add_one_word(const std::string & w);
     void add_file(const std::string & path);
+    void review(bool id);
 
     void check_word(int id, check_t type);
     void check_word(std::string & word, check_t type);

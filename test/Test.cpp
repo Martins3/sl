@@ -18,7 +18,7 @@ void store_data();
 
 
 int test_main(int argc, const char *argv[]){
-    thread loader([](){ Loader::getInstance().load(); });
+    thread loader([](){ Loader::getInstance().load_words(); });
     Loader & L = Loader::getInstance();
     L.load_config();
     Interface & I = Interface::getInstance();
@@ -40,6 +40,14 @@ void clear_data(){
 
 void clear_user_data(){
     Loader::getInstance().set_default_config();
+}
+
+void export_words_data(){
+    auto & L = Loader::getInstance();
+    L.load_words();
+    for(auto & w : L.getWords()){
+        cout << w.get_word() << endl;
+    }
 }
 
 

@@ -14,8 +14,9 @@ int main(int argc, const char *argv[]){
     // add one line for test stash
     // test_load();
     // add_word_using_file();
-    test_main(argc, argv);
+    // test_main(argc, argv);
     // clear_user_data();
+    export_words_data();
     return 0;
     // add some lines after stash
 }
