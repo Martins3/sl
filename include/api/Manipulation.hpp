@@ -1,5 +1,4 @@
 #ifndef MANIPULATION_H
-
 #define MANIPULATION_H
 
 

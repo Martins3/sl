@@ -1,4 +1,9 @@
 #include<Util.hpp>
+#include<iostream>
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
 
 std::string Util::exec(const std::string cmd){
     std::array<char, 128> buffer;

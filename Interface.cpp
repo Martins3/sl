@@ -1,6 +1,7 @@
 #include <Interface.hpp>
 #include <api/Strategy.hpp>
 #include <Query.hpp>
+#include <Util.hpp>
 #include <Loader.hpp>
 #include <iostream>
 #include <stdio.h>
@@ -107,12 +108,15 @@ void Interface::handle(){
             print_word_info(w, false);
             string input;
             getline(std::cin, input);
-            if(input == "Y"){
+            if(input == "y"){
                 w.check(false);
-            }else if(input == "N"){
+            }else if(input == "n"){
                 w.check(true);
-            }else if(input == "GG"){
+                cout << Util::exec("trans -sp " + w.get_word()) << endl;
+            }else if(input == "gg"){
                 break;
+            }else if(input == "x"){
+                L.check_word(word, REMOVE);
             }else{
                 cerr << "Specification:\nY : yes\nN : No\nGG : over" << endl;
                 break;
