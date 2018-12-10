@@ -17,11 +17,15 @@ const std::string Printer::ANSI_COLOR_RESET   = "\x1b[0m";
  * num: how many number
  */
 void Printer::histogram_line(std::string str, int left_indent, int num){
+  // cout << "[" << str << "]" << left_indent <<  endl;
   const char * ptr = str.c_str();
   const int Volume = 50;
 
   std::cout << ANSI_COLOR_GREEN;
-  printf("%*s : ", int(left_indent - str.size()),  ptr);
+  // left_indent -= str.size();
+  // assert(left_indent >= 0);
+  // cout << left_indent << endl;
+  printf("%*s : ", left_indent,  ptr);
 
   std::cout << ANSI_COLOR_YELLOW;
   for (int i = 0; i < num; i++) {

@@ -30,7 +30,7 @@ void Interface::parse_word_id() {
 int Interface::parse_options(int argc, const char *argv[]) {
   int opt;
 
-  while ((opt = getopt(argc, (char **)argv, "r:f:c:d:w:hs:x:it")) != EOF) {
+  while ((opt = getopt(argc, (char **)argv, "r:f:c:d:w:hs:x:it:")) != EOF) {
     switch (opt) {
     case 'i':
       interactive = true;
@@ -125,7 +125,7 @@ void Interface::handle() {
       return;
     }
     vector<string> table_name = {"REVIEW",
-                                 "INTERACTIVE,"
+                                 "INTERACTIVE",
                                  "ADD",
                                  "REM",
                                  "FORGET",
@@ -142,6 +142,7 @@ void Interface::handle() {
     }
 
     Printer::histogram(table_name, record_nums);
+    return;
   }
 
   if (interactive) {
