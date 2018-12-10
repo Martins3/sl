@@ -3,21 +3,29 @@
 #include <ctime>
 #include <string>
 #include <vector>
+#include <ctime>
 
 // record user's information
 
-/*! \enum OP_TYPE
- *
- *  Detailed description
- */
-enum OP_TYPE {
-  REVIEW,
-  INTERACTIVE, 
+typedef enum CHECK_TYPE{
+  REVIEW = 0,
+  INTERACTIVE = 1, 
+  ADD = 2,
+  REM = 3,
+  FORGET = 4,
+  SHUTDOWN = 5,
+  REMOVE = 6
+} check_t;
+
+class OP_Record{
+public:
+  time_t time_point;
+  check_t type;
+  OP_Record(check_t t):time_point(time(nullptr)), type(t){}
+  OP_Record()=default;
 };
 
-class Record{
 
-};
 
 
 #endif /* end of include guard: STATISTIC_HPP_N0RHLI4W */

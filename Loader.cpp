@@ -2,6 +2,7 @@
 #include <Word.hpp> // 用于提供friend 信息
 #include <User.hpp>
 #include <api/Strategy.hpp>
+#include <Statistic.hpp>
 
 #include <iomanip>
 #include <fstream>
@@ -14,6 +15,18 @@ using namespace std;
 
 // 注意：这里的~不可以使用
 const std::string Loader::config_dir = "/home/shen/Core/sl/src/";
+
+void to_json(json& j, const OP_Record& p){
+    j =  json{
+        {"time", p.time_point},
+        {"type", p.type},
+    };
+}
+
+void from_json(const json& j, OP_Record& p){
+    j.at("time").get_to(p.time_point);
+    j.at("type").get_to(p.type);
+}
 
 
 void to_json(json& j, const Word& p){
@@ -71,7 +84,17 @@ void Loader::set_default_config(){
     outfile.close();
 }
 
-
+void Loader::load_record(){
+    std::ifstream infile(config_dir + "record.json");
+    string line;
+    while (std::getline(infile, line)){
+        json j = json::parse(line);
+        OP_Record r = j;
+        OP_Record * w = new OP_Record(r);
+        records.push_back(w);
+    }
+    infile.close();
+}
 
 void Loader::load_words(){
     std::ifstream infile(config_dir + "words.json");
@@ -115,6 +138,7 @@ void Loader::add_one_word(const std::string & w){
     }
 
     // add word
+    Loader::getInstance().add_record(ADD);
     words.emplace_back(w, i);
 }
 
@@ -212,7 +236,17 @@ void Loader::handle_word(Word & word, check_t type){
             }
             words.erase(words.begin() + i, words.begin() + i + 1);
             break;
+        default:
+            cerr << "This action not belonging to word's action" << endl;
+            return;
     }
 }
 
 
+void Loader::add_record(check_t t){
+    OP_Record record(t);
+    std::ofstream outfile(config_dir + "record.json", std::ios_base::app | std::ios_base::out);
+    json j = record;
+    outfile << j.dump() << endl;
+    outfile.close();
+}

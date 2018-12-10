@@ -6,4 +6,5 @@ void add_word_using_file();
 int test_main(int argc, const char *argv[]);
 void export_words_data();
 void clear_user_data();
+void histogram();
 #endif /* end of include guard: TEST_H */

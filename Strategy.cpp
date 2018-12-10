@@ -1,9 +1,9 @@
 #include<api/Strategy.hpp>
 #include<Word.hpp>
+#include<Printer.hpp>
 #include<Loader.hpp>
 #include<algorithm>
 #include<climits>
-#include<Interface.hpp>
 #include<Util.hpp>
 
 using namespace std;
@@ -61,10 +61,12 @@ void Strategy::sort(std::vector<Word> & words, int count){
     std::sort(words.begin(), words.end(), SortByIndex());
 }
 
-void Strategy::interactive(){
+
+void Strategy::interactive(vector<Word> & words){
+        // interactive just use words as parameters instead of use Loader
+        // This file should not inlcude loader which is the core file
         Loader & L = Loader::getInstance();
-        Interface & I = Interface::getInstance();
-        vector<Word> & words = L.getWords();
+        // vector<Word> & words = L.getWords();
         srand (time(NULL));
 
         // get all the alread reviewed words
@@ -85,7 +87,7 @@ void Strategy::interactive(){
             int inx = rand() % len;
             Word & w = *(v[inx]);
 
-            I.print_word_info(w, false); // id is useless here
+            Printer::word_info(w, false); // id is useless here
             string input;
             getline(std::cin, input);
             if(input == "y"){

@@ -1,6 +1,7 @@
 #ifndef TEST_LODER_HPP
 #define TEST_LODER_HPP
 
+#include <Printer.hpp>
 #include <Loader.hpp>
 #include <iostream>
 #include <thread>
@@ -48,6 +49,12 @@ void export_words_data(){
     for(auto & w : L.getWords()){
         cout << w.get_word() << endl;
     }
+}
+
+void histogram(){
+  // string str= "Added Words";
+  // int left_indent = str.size();
+  // int num = 202;
 }
 
 
