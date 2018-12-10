@@ -43,11 +43,11 @@ public:
     }
 
     void set_flag(int i){
-        flag = flag | (1 << i);
+        flag |= (1 << i);
     }
 
     void clear_flag(int i){
-        // TODO: we need more effiency algorithm
+      flag &= ~(1 <<i);
     }
 
     std::string get_word(){
@@ -58,7 +58,7 @@ public:
         query_time_point.push_back(std::make_pair(time(nullptr), forget));
     }
 
-    Word(std::string w, int id): word(w), id(id){
+    Word(std::string w, int id): word(w){
         query_time_point.push_back(std::make_pair(time(nullptr), true));
     };
     Word() = default;

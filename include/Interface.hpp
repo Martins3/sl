@@ -38,20 +38,6 @@ class Interface{
         std::cout << std::left << std::setw(width) << std::setfill(' ') << t;
     }
 
-    void print_header(bool id){
-        Loader::getInstance().getUserConfig().is_show_word_id();
-        if(id){
-            std::cout << ANSI_COLOR_RED<< "id\t";
-        }
-        std::cout << ANSI_COLOR_CYAN << "word" << std::endl;
-    }
-
-    void print_word_info(Word & w, bool id){
-        if(id){
-            std::cout << ANSI_COLOR_YELLOW << w.get_id() << "\t";
-        }
-        std::cout << ANSI_COLOR_GREEN << w.get_word() << std::endl;
-    }
 
     void parse_word_id();
 
@@ -73,6 +59,21 @@ public:
     static const std::string ANSI_COLOR_MAGENTA ;
     static const std::string ANSI_COLOR_CYAN    ;
     static const std::string ANSI_COLOR_RESET   ;
+
+    void print_header(bool id){
+        Loader::getInstance().getUserConfig().is_show_word_id();
+        if(id){
+            std::cout << ANSI_COLOR_RED<< "id\t";
+        }
+        std::cout << ANSI_COLOR_CYAN << "word" << std::endl;
+    }
+
+    void print_word_info(Word & w, bool id){
+        if(id){
+            std::cout << ANSI_COLOR_YELLOW << w.get_id() << "\t";
+        }
+        std::cout << ANSI_COLOR_GREEN << w.get_word() << std::endl;
+    }
 private:
     Interface():review(true), shutdown(false), remove(false), add(false), interactive(false){}
 };

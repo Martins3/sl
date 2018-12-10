@@ -81,6 +81,8 @@ int Interface::parse_options(int argc, const char *argv[]){
                         -d add a file of words\n\
                         -x remove one word from database permanentely\n\
                         -s forbid this word to appear recently\n\
+                        -a set specific bit of the word's flag\n\
+                        -b clear specific bit of the word's flag\n\
                         -w add one word\n");
 
                 exit(0);
@@ -99,29 +101,7 @@ void Interface::handle(){
     bool id = U.is_show_word_id();
 
     if(interactive){
-        vector<Word> & words = L.getWords();
-        int len = words.size();
-        srand (time(NULL));
-        while(true){
-            int inx = rand() % len;
-            Word & w = words[inx];
-            print_word_info(w, false);
-            string input;
-            getline(std::cin, input);
-            if(input == "y"){
-                w.check(false);
-            }else if(input == "n"){
-                w.check(true);
-                cout << Util::exec("trans -sp " + w.get_word()) << endl;
-            }else if(input == "gg"){
-                break;
-            }else if(input == "x"){
-                L.check_word(word, REMOVE);
-            }else{
-                cerr << "Specification:\nY : yes\nN : No\nGG : over" << endl;
-                break;
-            }
-        }
+        Strategy::interactive();
         return;
     }
 

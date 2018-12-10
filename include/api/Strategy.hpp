@@ -8,6 +8,7 @@
 class Strategy{
 public:
     static void sort(std::vector<Word> & w, int count);
+    static void interactive();
 };
 
 #endif
