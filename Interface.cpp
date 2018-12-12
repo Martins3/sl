@@ -64,6 +64,7 @@ int Interface::parse_options(int argc, const char *argv[]) {
       add = true;
       word = optarg;
       cout << "Added words is : " << word << endl;
+      break;
     case 't':
       show_record = optarg;
       break;
