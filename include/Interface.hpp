@@ -23,7 +23,6 @@ class Interface{
     bool remove;
     bool add;
     bool interactive;
-    
 
     std::string path_to_config;
     std::string path_to_new_words;

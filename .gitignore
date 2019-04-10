@@ -2,6 +2,7 @@ GPATH
 GRTAGS
 GTAGS
 json.hpp
+.ccls-cache
 
 # Prerequisites
 *.d
