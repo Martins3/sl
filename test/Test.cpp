@@ -21,7 +21,6 @@ void store_data();
 int test_main(int argc, const char *argv[]){
     thread loader([](){ Loader::getInstance().load_words(); });
     Loader & L = Loader::getInstance();
-    L.load_config();
     Interface & I = Interface::getInstance();
     if(I.parse_options(argc,  argv) == 0){
         loader.join();
@@ -37,10 +36,6 @@ int test_main(int argc, const char *argv[]){
 
 void clear_data(){
     Loader::getInstance().store();
-}
-
-void clear_user_data(){
-    Loader::getInstance().set_default_config();
 }
 
 void export_words_data(){

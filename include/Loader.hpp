@@ -14,15 +14,15 @@
 
 
 class Loader{
-    static const std::string config_dir;
     std::vector<Word> words;
     std::vector<OP_Record *> records;
     User user;
 
 public:
     // load should be done at begining 
+    static const std::string config_dir;
+
     void load_words();
-    void load_config();
     void store();
     void load_record();
     void add_record(check_t t);
@@ -37,7 +37,8 @@ public:
     void check_word(std::string & word, check_t type);
     void handle_word(Word & word, check_t type);
 
-    void set_default_config();
+
+
     std::vector<Word> & getWords(){
         return words;
     }

@@ -1,9 +1,3 @@
-#include <Interface.hpp>
-#include <Loader.hpp>
-#include <Printer.hpp>
-#include <Query.hpp>
-#include <Util.hpp>
-#include <api/Strategy.hpp>
 #include <cstdlib>
 #include <ctype.h>
 #include <iostream>
@@ -11,12 +5,17 @@
 #include <stdlib.h>
 #include <string>
 
+#include <User.hpp>
+#include <Interface.hpp>
+#include <Loader.hpp>
+#include <Printer.hpp>
+#include <Util.hpp>
+#include <api/Strategy.hpp>
+
 using namespace std;
 
 void Interface::parse_word_id() {
-  User &u = Loader::getInstance().getUserConfig();
-
-  if (u.is_show_word_id()) {
+  if (User::show_word_id) {
     word_id = strtol(optarg, NULL, 10);
     if (word_id == errno) {
       std::cerr << "word id should be a integer" << std::endl;
@@ -56,6 +55,9 @@ int Interface::parse_options(int argc, const char *argv[]) {
       parse_word_id();
       remove = true;
       break;
+    case 'l':
+      learn();
+      break;
     case 's':
       parse_word_id();
       shutdown = true;
@@ -70,19 +72,19 @@ int Interface::parse_options(int argc, const char *argv[]) {
       break;
     case 'h':
       fprintf(stderr, "\
-                    usuage is:\n\
-                        -h show this help information\n\
-                        -r remember\n\
-                        -f forget\n\
-                        -c load new configuration file\n\
-                        -d add a file of words\n\
-                        -x remove one word from database permanentely\n\
-                        -s forbid this word to appear recently\n\
-                        -a set specific bit of the word's flag\n\
-                        -b clear specific bit of the word's flag\n\
-                        -t show user learn process\n\
-                        -w add one word\n");
-
+usuage is:\n\
+  -h show this help information\n\
+  -r remember\n\
+  -l learn\n\
+  -f forget\n\
+  -c load new configuration file\n\
+  -d add a file of words\n\
+  -x remove one word from database permanentely\n\
+  -s forbid this word to appear recently\n\
+  -a set specific bit of the word's flag\n\
+  -b clear specific bit of the word's flag\n\
+  -t show user learn process\n\
+  -w add one word\n");
       exit(0);
     default:
       cout << endl;
@@ -94,8 +96,7 @@ int Interface::parse_options(int argc, const char *argv[]) {
 
 void Interface::handle() {
   Loader &L = Loader::getInstance();
-  User &U = L.getUserConfig();
-  bool id = U.is_show_word_id();
+  bool id = User::show_word_id;
   vector<Word> &words = L.getWords();
 
   if (show_record.size()) {
@@ -164,7 +165,7 @@ void Interface::handle() {
 
   if (shutdown) {
     L.add_record(SHUTDOWN);
-    if (U.is_show_word_id()) {
+    if (User::show_word_id) {
       L.check_word(word_id, SHUTDOWN);
     } else {
       L.check_word(word, SHUTDOWN);
@@ -174,7 +175,7 @@ void Interface::handle() {
 
   if (remove) {
     L.add_record(REMOVE);
-    if (U.is_show_word_id()) {
+    if (User::show_word_id) {
       L.check_word(word_id, REMOVE);
     } else {
       L.check_word(word, REMOVE);
@@ -191,7 +192,7 @@ void Interface::handle() {
   if (review) {
     // just show words
     L.add_record(REVIEW);
-    int count = L.getUserConfig().get_show_limitation();
+    int count = User::show_limitation;
     Strategy::sort(words, count);
 
     Printer::header(id);
@@ -202,9 +203,10 @@ void Interface::handle() {
 
     // show random
     int len = words.size();
-    int r_limit = U.get_random_show_limitation();
+    int r_limit = User::random_show_limitation;
 
     if (r_limit > 0) {
+      // TODO
     }
 
     srand(time(NULL));
@@ -219,14 +221,14 @@ void Interface::handle() {
   // show words
   if (forget) {
     L.add_record(FORGET);
-    if (U.is_show_word_id()) {
+    if (User::show_word_id) {
       L.check_word(word_id, FORGET);
     } else {
       L.check_word(word, FORGET);
     }
   } else {
     L.add_record(REM);
-    if (U.is_show_word_id()) {
+    if (User::show_word_id) {
       L.check_word(word_id, REM);
     } else {
       L.check_word(word, REM);

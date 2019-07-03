@@ -6,79 +6,7 @@
             "-std=c++14",
             "-g",
             "-Wall",
-            "-DEBUG",
-            "-pthread",
-            "-I./include",
-            "-I./test",
-            "-o",
-            "test/Test.o",
-            "test/Test.cpp"
-        ],
-        "directory": "/home/shen/Core/sl",
-        "file": "test/Test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-std=c++14",
-            "-g",
-            "-Wall",
-            "-DEBUG",
-            "-pthread",
-            "-I./include",
-            "-I./test",
-            "-o",
-            "Strategy.o",
-            "Strategy.cpp"
-        ],
-        "directory": "/home/shen/Core/sl",
-        "file": "Strategy.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-std=c++14",
-            "-g",
-            "-Wall",
-            "-DEBUG",
-            "-pthread",
-            "-I./include",
-            "-I./test",
-            "-o",
-            "Interface.o",
-            "Interface.cpp"
-        ],
-        "directory": "/home/shen/Core/sl",
-        "file": "Interface.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-std=c++14",
-            "-g",
-            "-Wall",
-            "-DEBUG",
-            "-pthread",
-            "-I./include",
-            "-I./test",
-            "-o",
-            "Query.o",
-            "Query.cpp"
-        ],
-        "directory": "/home/shen/Core/sl",
-        "file": "Query.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-std=c++14",
-            "-g",
-            "-Wall",
-            "-DEBUG",
+            "-DDEBUG",
             "-pthread",
             "-I./include",
             "-I./test",
@@ -96,16 +24,16 @@
             "-std=c++14",
             "-g",
             "-Wall",
-            "-DEBUG",
+            "-DDEBUG",
             "-pthread",
             "-I./include",
             "-I./test",
             "-o",
-            "Util.o",
-            "Util.cpp"
+            "Strategy.o",
+            "Strategy.cpp"
         ],
         "directory": "/home/shen/Core/sl",
-        "file": "Util.cpp"
+        "file": "Strategy.cpp"
     },
     {
         "arguments": [
@@ -114,7 +42,97 @@
             "-std=c++14",
             "-g",
             "-Wall",
-            "-DEBUG",
+            "-DDEBUG",
+            "-pthread",
+            "-I./include",
+            "-I./test",
+            "-o",
+            "test/Test.o",
+            "test/Test.cpp"
+        ],
+        "directory": "/home/shen/Core/sl",
+        "file": "test/Test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-DDEBUG",
+            "-pthread",
+            "-I./include",
+            "-I./test",
+            "-o",
+            "Learn.o",
+            "Learn.cpp"
+        ],
+        "directory": "/home/shen/Core/sl",
+        "file": "Learn.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-DDEBUG",
+            "-pthread",
+            "-I./include",
+            "-I./test",
+            "-o",
+            "Interface.o",
+            "Interface.cpp"
+        ],
+        "directory": "/home/shen/Core/sl",
+        "file": "Interface.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-DDEBUG",
+            "-pthread",
+            "-I./include",
+            "-I./test",
+            "-o",
+            "Printer.o",
+            "Printer.cpp"
+        ],
+        "directory": "/home/shen/Core/sl",
+        "file": "Printer.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-DDEBUG",
+            "-pthread",
+            "-I./include",
+            "-I./test",
+            "-o",
+            "Query.o",
+            "Query.cpp"
+        ],
+        "directory": "/home/shen/Core/sl",
+        "file": "Query.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-DDEBUG",
             "-pthread",
             "-I./include",
             "-I./test",
@@ -124,5 +142,23 @@
         ],
         "directory": "/home/shen/Core/sl",
         "file": "Loader.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-DDEBUG",
+            "-pthread",
+            "-I./include",
+            "-I./test",
+            "-o",
+            "Util.o",
+            "Util.cpp"
+        ],
+        "directory": "/home/shen/Core/sl",
+        "file": "Util.cpp"
     }
 ]
