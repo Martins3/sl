@@ -21,7 +21,7 @@ void learn() {
           << endl;
   Loader &L = Loader::getInstance();
   vector<Word> &words = L.getWords();
-  random_shuffle(words.begin(), words.end());
+  // random_shuffle(words.begin(), words.end());
 
   // FIXME why we can not merge these two line.
   auto num = User::learn_num;
