@@ -1,23 +1,23 @@
 # space : decrease
 # * : data base
 # otherwise: increase
-*shocker
-symposium
+buster
+mull
+*intervening
+intrisinc
+favored
+orthogonal
+poll
+pang
+lobby
+anomalous
+facto
+meth
+invoice
 curation
-penultimate
-scooter
-mitigate
-obfuscate
-beg
-lavish
-bloat
-eternity
-burbine
-receipt
-founday
-idiomatic
-plow
-lumbering
-factotum
-accountable
-pending
+sansation
+insulin
+pessimise
+obscure
+swindled
+gralloc
