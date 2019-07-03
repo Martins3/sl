@@ -29,7 +29,7 @@ void Interface::parse_word_id() {
 int Interface::parse_options(int argc, const char *argv[]) {
   int opt;
 
-  while ((opt = getopt(argc, (char **)argv, "r:f:c:d:w:hs:x:it:")) != EOF) {
+  while ((opt = getopt(argc, (char **)argv, "r:f:c:d:w:hs:x:it:l")) != EOF) {
     switch (opt) {
     case 'i':
       interactive = true;
@@ -57,7 +57,7 @@ int Interface::parse_options(int argc, const char *argv[]) {
       break;
     case 'l':
       learn();
-      break;
+      return 1;
     case 's':
       parse_word_id();
       shutdown = true;
