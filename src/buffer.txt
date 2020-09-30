@@ -1,23 +1,23 @@
-# space : decrease
-# * : data base
+#space : decrease
+#* : data base
 # otherwise: increase
-buster
 mull
-*intervening
+buster
+blazing
+pagination
+gralloc
+swindled
+obscure
+pessimise
+sansation
+curation
+meth
 intrisinc
 favored
 orthogonal
 poll
 pang
-lobby
+*lobby
 anomalous
 facto
-meth
-invoice
-curation
-sansation
-insulin
-pessimise
-obscure
-swindled
-gralloc
+receipt

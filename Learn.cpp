@@ -41,9 +41,11 @@ void learn() {
   int i = 0;
   while (std::getline(infile, line)) {
     if (line[0] != '#') {
+      cerr << "read line : " << words[i].get_word() << endl;
       if(line[0] == ' '){
         words[i].check(false);
       }else if(line[0] == '*'){
+        cerr << "remove : " << words[i].get_word() << endl;
         words.erase(i + words.begin());
       }else{
         words[i].check(true);
